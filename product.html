@@ -3,194 +3,213 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product — Paddles Peak</title>
-  <meta name="description" content="Shop Paddles Peak premium pickleball paddles. Raw carbon fiber face, polymer honeycomb core. USAPA approved.">
-  <link rel="stylesheet" href="/css/styles.css">
+  <title>The Base Camp Bundle — Paddles Peak</title>
+  <meta name="description" content="The Base Camp Bundle — The Summit Paddle + Paddles Peak Carry Case. $59.99. USAPA Approved. Raw Carbon Fiber.">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-page="product">
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
-    <div id="nav-menu" class="nav-menu">
-      <a href="/shop.html">Shop</a>
-      <a href="/index.html#features">Features</a>
-      <a href="/index.html#testimonials">Reviews</a>
-      <a href="/index.html#about">About</a>
-    </div>
-    <div class="nav-cart">
-      <a href="/cart.html">
-        <button class="nav-cart-btn" aria-label="Shopping cart">
-          🛒 Cart
-          <span class="cart-badge">0</span>
-        </button>
-      </a>
-    </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-  </div>
-</nav>
-
-<!-- BREADCRUMB -->
-<div class="page-header" style="padding:1.5rem;text-align:left;">
-  <div class="container">
-    <div class="breadcrumb" style="justify-content:flex-start;">
-      <a href="/index.html">Home</a>
-      <span>›</span>
-      <a href="/shop.html">Shop</a>
-      <span>›</span>
-      <span id="product-category" style="color:var(--text-primary);text-transform:capitalize;">Product</span>
-    </div>
-  </div>
-</div>
-
-<!-- PRODUCT DETAIL -->
-<div class="product-detail">
-  <!-- Gallery -->
-  <div class="product-gallery">
-    <div class="product-main-img-wrap">
-      <img id="product-main-img" src="/images/paddle-main.jpg" alt="Paddles Peak product"
-        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22500%22 viewBox=%220 0 400 500%22><rect fill=%22%231a2535%22 width=%22400%22 height=%22500%22/><text fill=%22%232dd4bf%22 font-size=%2220%22 font-family=%22sans-serif%22 x=%22200%22 y=%22250%22 text-anchor=%22middle%22>PADDLES PEAK</text></svg>'">
-    </div>
-    <div id="product-thumbs" class="product-thumbs"></div>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free Shipping on Orders Over $50 &nbsp;·&nbsp; USAPA Approved &nbsp;·&nbsp; 30-Day Returns
   </div>
 
-  <!-- Info -->
-  <div class="product-info-col">
-    <span id="product-category-badge" class="product-category-badge">paddles</span>
-    <h1 class="product-title" id="product-name">The Summit Paddle</h1>
-    <div class="product-rating-row" id="product-rating"></div>
-    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <div class="product-price-display" id="product-price">$89.99</div>
-      <span id="product-stock" class="stock-badge in-stock">In Stock</span>
-    </div>
-    <p class="product-short-desc" id="product-description">Loading...</p>
-
-    <!-- Quantity -->
-    <div class="qty-row">
-      <span class="qty-label">Qty</span>
-      <div class="qty-control">
-        <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
-        <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="99" aria-label="Quantity">
-        <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">PADDLES PEAK</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html" class="nav-cart">Cart <span class="cart-count">(0)</span></a>
       </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="cart.html">Cart <span class="cart-count">(0)</span></a>
+  </div>
 
-    <!-- Actions -->
-    <div class="product-actions">
-      <button class="btn btn-teal btn-lg" id="add-to-cart-btn">Add to Cart</button>
-      <button class="btn btn-outline" id="wishlist-btn">♡ Add to Wishlist</button>
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="index.html">Home</a>
+      <span class="sep">&rsaquo;</span>
+      <span>The Base Camp Bundle</span>
     </div>
+  </div>
 
-    <!-- Trust badges -->
-    <div class="product-trust">
-      <div class="trust-item"><span class="icon">✓</span> USAPA Approved — Court ready</div>
-      <div class="trust-item"><span class="icon">🚚</span> Free shipping on orders over $75</div>
-      <div class="trust-item"><span class="icon">↩</span> 30-day hassle-free returns</div>
-      <div class="trust-item"><span class="icon">🔒</span> Secure checkout</div>
-    </div>
-
-    <!-- Tabs -->
-    <div class="tabs">
-      <div class="tab-buttons">
-        <button class="tab-btn active" data-tab="description">Description</button>
-        <button class="tab-btn" data-tab="specs">Specifications</button>
-        <button class="tab-btn" data-tab="reviews">Reviews</button>
-      </div>
-      <div class="tab-panel active" id="tab-description">
-        <p id="tab-desc-text" style="color:var(--text-secondary);line-height:1.8;font-size:0.95rem;">Loading...</p>
-      </div>
-      <div class="tab-panel" id="tab-specs">
-        <table class="specs-table">
-          <tbody id="product-specs-table"></tbody>
-        </table>
-      </div>
-      <div class="tab-panel" id="tab-reviews">
-        <div style="display:flex;flex-direction:column;gap:1.25rem;">
-          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-              <strong style="color:var(--text-primary);">Jordan M.</strong>
-              <span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></span>
-            </div>
-            <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">"The spin I get with this paddle is absolutely insane. Went from 4.0 to 4.5 within months. Highly recommend!"</p>
+  <!-- Product Section -->
+  <section class="product-section">
+    <div class="container">
+      <div class="product-layout">
+        <!-- Gallery -->
+        <div class="gallery-col">
+          <div class="gallery-main">
+            <img id="gallery-main" class="product-img"
+              src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png"
+              alt="The Base Camp Bundle — paddle and case">
           </div>
-          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
-            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
-              <strong style="color:var(--text-primary);">Ryan K.</strong>
-              <span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star half">★</span></span>
+          <div class="gallery-thumbs">
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png"
+              data-alt="Bundle shot — paddle and case">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png" alt="Bundle">
             </div>
-            <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">"Switched from a big brand and can't believe the value. The feel and control at this price is remarkable."</p>
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_04 PM.png"
+              data-alt="Paddle front">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_04 PM.png" alt="Paddle">
+            </div>
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_23 PM.png"
+              data-alt="Carry case render">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_23 PM.png" alt="Case">
+            </div>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+            <span style="color:#2dd4bf;font-size:.95rem;">★★★★★</span>
+            <span style="font-size:.85rem;color:#444;">4.9 (89 reviews)</span>
+          </div>
+          <h1 style="font-size:1.8rem;font-weight:800;color:#111;">The Base Camp Bundle</h1>
+          <p class="price">$59.99</p>
+
+          <div>
+            <p class="includes-title">What's Included:</p>
+            <div class="includes-list">
+              <div class="includes-item">
+                <span class="check">✓</span>
+                <div class="includes-item-text">
+                  <strong>The Summit Paddle</strong>
+                  <p>Raw Carbon Fiber Face, Polymer Honeycomb Core, USAPA Approved</p>
+                </div>
+              </div>
+              <div class="includes-item">
+                <span class="check">✓</span>
+                <div class="includes-item-text">
+                  <strong>Paddles Peak Carry Case</strong>
+                  <p>Padded interior, mesh front pocket, zip closure</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Qty + Add to Cart -->
+          <div style="display:flex;gap:12px;align-items:center;margin-top:4px;">
+            <div class="qty-control">
+              <button class="qty-btn" id="qty-minus">−</button>
+              <span class="qty-num" id="qty-display">1</span>
+              <button class="qty-btn" id="qty-plus">+</button>
+            </div>
+            <button class="btn-primary" id="add-to-cart-btn" style="flex:1;">Add to Cart — $59.99</button>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="hero-trust">
+            <span class="trust-badge"><span class="check">✓</span> USAPA Approved</span>
+            <span class="trust-badge"><span class="check">✓</span> Free Shipping $50+</span>
+            <span class="trust-badge"><span class="check">✓</span> 30-Day Returns</span>
+            <span class="trust-badge"><span class="check">✓</span> Secure Checkout</span>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
+  </section>
 
-<!-- RELATED PRODUCTS -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <h2 class="section-title">You May Also Like</h2>
-      <span class="accent-line"></span>
-    </div>
-    <div class="products-grid" id="related-grid"></div>
-  </div>
-</section>
+  <!-- Tabs Section -->
+  <section class="product-tabs-section">
+    <div class="container">
+      <div class="tab-nav">
+        <button class="tab-btn active" data-tab="description">Description</button>
+        <button class="tab-btn" data-tab="specs">Specifications</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+      </div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
-      <p class="footer-brand-desc">Engineered for champions. Priced for everyone.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <div class="footer-col-links">
-        <a href="/shop.html">All Products</a>
-        <a href="/shop.html">Paddles</a>
-        <a href="/shop.html">Bundles</a>
+      <!-- Description Tab -->
+      <div class="tab-pane active" id="tab-description">
+        <div style="max-width:720px;">
+          <h2 style="font-size:1.4rem;font-weight:800;color:#111;margin-bottom:16px;">Everything You Need to Dominate the Court</h2>
+          <p style="margin-bottom:16px;line-height:1.8;">The Base Camp Bundle is the complete pickleball starter kit for serious players. Combining our flagship Summit Paddle with the premium Paddles Peak Carry Case, this bundle gives you tournament-level equipment at an unbeatable price.</p>
+          <p style="margin-bottom:16px;line-height:1.8;">The Summit Paddle features a T700 raw carbon fiber face that delivers exceptional spin and precise control, backed by a polymer honeycomb core engineered for maximum power and soft touch. Whether you're a beginner stepping up your game or an experienced player looking for quality gear, the Summit Paddle delivers.</p>
+          <p style="line-height:1.8;">The Paddles Peak Carry Case completes the bundle — padded interior protection, a front mesh pocket for balls and accessories, and a secure zip closure. It's everything you need, bundled into one clean package.</p>
+        </div>
+      </div>
+
+      <!-- Specs Tab -->
+      <div class="tab-pane" id="tab-specs">
+        <div style="max-width:600px;">
+          <table class="specs-table" style="font-size:.95rem;">
+            <tr><td>Face Material</td><td>Raw Carbon Fiber (T700)</td></tr>
+            <tr><td>Core</td><td>Polymer Honeycomb</td></tr>
+            <tr><td>Weight</td><td>7.8 oz</td></tr>
+            <tr><td>Grip Size</td><td>4.25 inches</td></tr>
+            <tr><td>Grip Length</td><td>5.25 inches</td></tr>
+            <tr><td>Paddle Length</td><td>15.5 inches</td></tr>
+            <tr><td>Paddle Width</td><td>8 inches</td></tr>
+            <tr><td>Certification</td><td>USAPA Approved</td></tr>
+            <tr><td>Includes</td><td>Summit Paddle + Paddles Peak Carry Case</td></tr>
+            <tr><td>Case Style</td><td>Padded zip-close with front mesh pocket</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- Reviews Tab -->
+      <div class="tab-pane" id="tab-reviews">
+        <div style="margin-bottom:16px;display:flex;align-items:center;gap:12px;">
+          <span style="font-size:2.5rem;font-weight:800;color:#111;">4.9</span>
+          <div>
+            <div style="color:#2dd4bf;font-size:1.1rem;">★★★★★</div>
+            <div style="font-size:.85rem;color:#888;">Based on 89 reviews</div>
+          </div>
+        </div>
+        <div class="reviews-grid" style="grid-template-columns:repeat(auto-fill,minmax(280px,1fr));">
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Absolutely love this paddle. The carbon fiber face gives insane spin and the case keeps everything protected. Best purchase I've made for pickleball."</p>
+            <p class="review-author">Sarah M. — Verified Buyer</p>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Got the bundle and couldn't be happier. Paddle quality is on par with paddles costing twice as much. The carry case is a nice bonus."</p>
+            <p class="review-author">James K. — Verified Buyer</p>
+          </div>
+          <div class="review-card">
+            <div class="review-stars">★★★★★</div>
+            <p class="review-text">"Fast shipping, great packaging, and the paddle performs beautifully. The mountain graphic looks amazing on court."</p>
+            <p class="review-author">Lisa T. — Verified Buyer</p>
+          </div>
+        </div>
       </div>
     </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <div class="footer-col-links">
-        <a href="#">FAQ</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <div class="footer-col-links">
-        <a href="/index.html#about">About</a>
-        <a href="/admin.html">Admin</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 Paddles Peak. All rights reserved.</p>
-    <span class="footer-usapa">✓ USAPA Approved Products</span>
-  </div>
-</footer>
+  </section>
 
-<script>
-  // Set tab description text once product loads
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      const desc = document.getElementById('product-description');
-      const tabDesc = document.getElementById('tab-desc-text');
-      if (desc && tabDesc) tabDesc.textContent = desc.textContent;
-      const badge = document.getElementById('product-category-badge');
-      const cat = document.getElementById('product-category');
-      if (badge && cat) badge.textContent = cat.textContent;
-    }, 50);
-  });
-</script>
-<script src="/js/products.js"></script>
-<script src="/js/cart.js"></script>
-<script src="/js/orders.js"></script>
-<script src="/js/main.js"></script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">PADDLES PEAK</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html">Cart</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Paddles Peak. All rights reserved.</p>
+        <p style="margin-top:4px;">USAPA Approved · Premium Pickleball Equipment</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/product-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>

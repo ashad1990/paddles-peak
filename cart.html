@@ -4,145 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cart — Paddles Peak</title>
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body data-page="cart">
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
-    <div id="nav-menu" class="nav-menu">
-      <a href="/shop.html">Shop</a>
-      <a href="/index.html#features">Features</a>
-      <a href="/index.html#testimonials">Reviews</a>
-    </div>
-    <div class="nav-cart">
-      <a href="/cart.html">
-        <button class="nav-cart-btn" aria-label="Shopping cart">
-          🛒 Cart
-          <span class="cart-badge">0</span>
-        </button>
-      </a>
-    </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
-  </div>
-</nav>
-
-<!-- PAGE HEADER -->
-<div class="page-header">
-  <div class="breadcrumb">
-    <a href="/index.html">Home</a>
-    <span>›</span>
-    <span style="color:var(--text-primary)">Cart</span>
-  </div>
-  <h1>Your Cart</h1>
-</div>
-
-<!-- CART PAGE -->
-<div class="cart-page">
-
-  <!-- Empty state -->
-  <div id="cart-empty" style="display:none;">
-    <div style="font-size:3.5rem;margin-bottom:1rem;">🛒</div>
-    <h2>Your cart is empty</h2>
-    <p>Looks like you haven't added anything yet. Let's fix that.</p>
-    <a href="/shop.html" class="btn btn-teal btn-lg">Shop Now</a>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free Shipping on Orders Over $50 &nbsp;·&nbsp; USAPA Approved &nbsp;·&nbsp; 30-Day Returns
   </div>
 
-  <!-- Cart content -->
-  <div id="cart-content" style="display:none;">
-    <!-- Table -->
-    <div>
-      <div class="cart-table-wrap">
-        <table class="cart-table">
-          <thead>
-            <tr>
-              <th style="min-width:200px;">Product</th>
-              <th>Price</th>
-              <th>Quantity</th>
-              <th>Total</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody id="cart-tbody"></tbody>
-        </table>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">PADDLES PEAK</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html" class="nav-cart">Cart <span class="cart-count">(0)</span></a>
       </div>
-      <div style="margin-top:1rem;display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap;">
-        <a href="/shop.html" class="btn btn-ghost">← Continue Shopping</a>
-      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
     </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="cart.html">Cart <span class="cart-count">(0)</span></a>
+  </div>
 
-    <!-- Summary -->
-    <div class="cart-summary">
-      <h3>Order Summary</h3>
-      <div class="summary-row">
-        <span>Subtotal</span>
-        <span id="cart-subtotal">$0.00</span>
-      </div>
-      <div class="summary-row">
-        <span>Shipping</span>
-        <span id="cart-shipping">—</span>
-      </div>
-      <div id="shipping-note" class="shipping-note"></div>
-      <div class="summary-row">
-        <span>Est. Tax (8%)</span>
-        <span id="cart-tax">$0.00</span>
-      </div>
-      <div class="summary-row total">
-        <span class="label">Total</span>
-        <span id="cart-total">$0.00</span>
-      </div>
-      <a href="/checkout.html" class="btn btn-teal btn-lg w-full" style="justify-content:center;margin-top:1rem;display:flex;">
-        Proceed to Checkout →
-      </a>
-      <div style="margin-top:1rem;text-align:center;">
-        <div style="display:flex;justify-content:center;gap:0.75rem;flex-wrap:wrap;font-size:0.8rem;color:var(--text-secondary);">
-          <span>🔒 Secure</span>
-          <span>🚚 Free ship $75+</span>
-          <span>↩ Easy returns</span>
-        </div>
-      </div>
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Your Cart</h1>
     </div>
   </div>
-</div>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
-      <p class="footer-brand-desc">Engineered for champions. Priced for everyone.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <div class="footer-col-links">
-        <a href="/shop.html">All Products</a>
+  <!-- Cart Content -->
+  <section class="cart-section">
+    <div class="container">
+      <div id="cart-container">
+        <!-- Rendered by JS -->
+        <div style="text-align:center;padding:60px 0;color:#888;">Loading cart...</div>
       </div>
     </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <div class="footer-col-links">
-        <a href="#">FAQ</a>
-        <a href="#">Returns</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <div class="footer-col-links">
-        <a href="/index.html#about">About</a>
-      </div>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2025 Paddles Peak. All rights reserved.</p>
-    <span class="footer-usapa">✓ USAPA Approved Products</span>
-  </div>
-</footer>
+  </section>
 
-<script src="/js/products.js"></script>
-<script src="/js/cart.js"></script>
-<script src="/js/orders.js"></script>
-<script src="/js/main.js"></script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">PADDLES PEAK</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html">Cart</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Paddles Peak. All rights reserved.</p>
+        <p style="margin-top:4px;">USAPA Approved · Premium Pickleball Equipment</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/product-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
