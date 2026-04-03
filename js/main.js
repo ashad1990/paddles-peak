@@ -1,712 +1,513 @@
-// =============================================
-// main.js — Paddles Peak core JS logic
-// =============================================
-
-// ── Constants ─────────────────────────────────────────────────────
-const TAX_RATE = 0.08;
-const FREE_SHIPPING_THRESHOLD = 75;
-const SHIPPING_COST = 9.99;
-
-// ── HTML Sanitizer ────────────────────────────────────────────────
-function escapeHtml(str) {
-  if (str == null) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#39;");
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-  initNav();
-  updateCartBadge();
-  initSmoothScroll();
-
-  const page = detectPage();
-  if (page === "index") initHomepage();
-  if (page === "shop") initShop();
-  if (page === "product") initProductPage();
-  if (page === "cart") initCartPage();
-  if (page === "checkout") initCheckout();
-  if (page === "admin") initAdmin();
-});
-
-// ── Page Detection ──────────────────────────────────────────────
-function detectPage() {
-  const path = window.location.pathname;
-  if (path.includes("shop")) return "shop";
-  if (path.includes("product")) return "product";
-  if (path.includes("cart")) return "cart";
-  if (path.includes("checkout")) return "checkout";
-  if (path.includes("admin")) return "admin";
-  return "index";
-}
-
-// ── Navigation ──────────────────────────────────────────────────
-function initNav() {
-  const toggle = document.getElementById("nav-toggle");
-  const menu = document.getElementById("nav-menu");
-  if (toggle && menu) {
-    toggle.addEventListener("click", () => {
-      menu.classList.toggle("open");
-      toggle.setAttribute("aria-expanded", menu.classList.contains("open"));
-    });
-  }
-
-  // Sticky nav shadow on scroll
-  const nav = document.querySelector(".navbar");
-  if (nav) {
-    window.addEventListener("scroll", () => {
-      nav.classList.toggle("scrolled", window.scrollY > 20);
-    });
-  }
-
-  // Close menu on outside click
-  document.addEventListener("click", (e) => {
-    if (menu && !menu.contains(e.target) && toggle && !toggle.contains(e.target)) {
-      menu.classList.remove("open");
-    }
-  });
-}
-
-// ── Smooth Scroll ───────────────────────────────────────────────
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((a) => {
-    a.addEventListener("click", (e) => {
-      const target = document.querySelector(a.getAttribute("href"));
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: "smooth" });
-      }
-    });
-  });
-}
-
-// ── Homepage ────────────────────────────────────────────────────
-function initHomepage() {
-  renderProductCards(document.getElementById("products-grid"), PRODUCTS);
-}
-
-function renderProductCards(container, products) {
-  if (!container) return;
-  container.innerHTML = products.map(productCardHTML).join("");
-  container.querySelectorAll(".btn-add-cart").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      addToCart(parseInt(btn.dataset.id), 1);
-      btn.textContent = "Added!";
-      btn.classList.add("added");
-      setTimeout(() => {
-        btn.textContent = "Add to Cart";
-        btn.classList.remove("added");
-      }, 1500);
-    });
-  });
-}
-
-function productCardHTML(p) {
-  const stars = renderStars(p.rating);
-  return `
-    <div class="product-card">
-      <a href="/product.html?id=${p.id}" class="product-card-img-link">
-        <div class="product-card-img" style="background-image:url('${p.image}')">
-          <div class="product-card-img-overlay"></div>
-          ${p.category === "bundles" ? '<span class="badge-best">Best Value</span>' : ""}
-        </div>
-      </a>
-      <div class="product-card-body">
-        <p class="product-card-cat">${p.category}</p>
-        <a href="/product.html?id=${p.id}" class="product-card-title">${p.name}</a>
-        <p class="product-card-desc">${p.shortDescription}</p>
-        <div class="product-card-rating">${stars} <span class="rating-count">(${p.reviews})</span></div>
-        <div class="product-card-footer">
-          <span class="product-price">$${p.price.toFixed(2)}</span>
-          <button class="btn btn-teal btn-add-cart" data-id="${p.id}">Add to Cart</button>
-        </div>
-      </div>
-    </div>`;
-}
+/* main.js — Paddles Peak */
 
 function renderStars(rating) {
   const full = Math.floor(rating);
   const half = rating % 1 >= 0.5;
-  let html = "";
-  for (let i = 0; i < full; i++) html += '<span class="star full">★</span>';
-  if (half) html += '<span class="star half">★</span>';
-  for (let i = full + (half ? 1 : 0); i < 5; i++) html += '<span class="star empty">☆</span>';
-  return `<span class="stars">${html}</span><span class="rating-num">${rating}</span>`;
-}
-
-// ── Shop Page ────────────────────────────────────────────────────
-function initShop() {
-  const grid = document.getElementById("shop-grid");
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const sortSelect = document.getElementById("sort-select");
-  let activeFilter = "all";
-
-  // Populate dynamic filter counts from PRODUCTS
-  const countAll = document.getElementById("count-all");
-  const countPaddles = document.getElementById("count-paddles");
-  const countBundles = document.getElementById("count-bundles");
-  const countAccessories = document.getElementById("count-accessories");
-  if (countAll) countAll.textContent = PRODUCTS.length;
-  if (countPaddles) countPaddles.textContent = PRODUCTS.filter((p) => p.category === "paddles").length;
-  if (countBundles) countBundles.textContent = PRODUCTS.filter((p) => p.category === "bundles").length;
-  if (countAccessories) countAccessories.textContent = PRODUCTS.filter((p) => p.category === "accessories").length;
-
-  function applyFilterSort() {
-    let list = [...PRODUCTS];
-    if (activeFilter !== "all") list = list.filter((p) => p.category === activeFilter);
-    const sort = sortSelect ? sortSelect.value : "popular";
-    if (sort === "price-asc") list.sort((a, b) => a.price - b.price);
-    else if (sort === "price-desc") list.sort((a, b) => b.price - a.price);
-    else list.sort((a, b) => b.reviews - a.reviews); // popularity
-    renderProductCards(grid, list);
-    const count = document.getElementById("results-count");
-    if (count) count.textContent = `${list.length} product${list.length !== 1 ? "s" : ""}`;
+  let html = '';
+  for (let i = 0; i < 5; i++) {
+    if (i < full) html += '<span class="star filled">★</span>';
+    else if (i === full && half) html += '<span class="star half">★</span>';
+    else html += '<span class="star empty">☆</span>';
   }
-
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
-      activeFilter = btn.dataset.filter;
-      applyFilterSort();
-    });
-  });
-
-  if (sortSelect) sortSelect.addEventListener("change", applyFilterSort);
-
-  applyFilterSort();
+  return html;
 }
 
-// ── Product Detail Page ──────────────────────────────────────────
+function renderProductCards(products, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = products.map(p => `
+    <div class="product-card">
+      ${p.badge ? `<span class="product-badge">${p.badge}</span>` : ''}
+      <a href="product.html?id=${p.id}" class="product-card-img-link">
+        <div class="product-card-img-wrap">
+          <img src="${p.primaryImage}" alt="${p.name}" class="product-card-img" loading="lazy">
+        </div>
+      </a>
+      <div class="product-card-body">
+        <h3 class="product-card-name">
+          <a href="product.html?id=${p.id}">${p.name}</a>
+        </h3>
+        <p class="product-card-desc">${p.shortDesc}</p>
+        <div class="product-card-rating">
+          ${renderStars(p.rating)}
+          <span class="rating-count">(${p.reviewCount})</span>
+        </div>
+        <div class="product-card-footer">
+          <span class="product-card-price">$${p.price.toFixed(2)}</span>
+          <button class="btn btn-primary btn-add-cart" onclick="addToCart('${p.id}')">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function initCartBadge() {
+  updateCartBadge();
+}
+
+/* ── NAV TOGGLE ── */
+function initNavToggle() {
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      links.classList.toggle('open');
+    });
+  }
+}
+
+/* ── PRODUCT PAGE ── */
 function initProductPage() {
   const params = new URLSearchParams(window.location.search);
-  const id = parseInt(params.get("id")) || 1;
-  const product = PRODUCTS.find((p) => p.id === id);
-  if (!product) return;
-
-  // Set basic info
-  setText("product-name", product.name);
-  setText("product-price", `$${product.price.toFixed(2)}`);
-  setText("product-description", product.description);
-  setText("product-category", product.category);
-
-  // Star ratings
-  const ratingEl = document.getElementById("product-rating");
-  if (ratingEl) ratingEl.innerHTML = renderStars(product.rating) + ` <span class="review-count">(${product.reviews} reviews)</span>`;
-
-  // Stock
-  const stockEl = document.getElementById("product-stock");
-  if (stockEl) {
-    stockEl.textContent = product.stock > 0 ? (product.stock < 10 ? `Only ${product.stock} left!` : "In Stock") : "Out of Stock";
-    stockEl.className = "stock-badge " + (product.stock > 10 ? "in-stock" : product.stock > 0 ? "low-stock" : "out-stock");
+  const id = params.get('id');
+  const product = PRODUCTS.find(p => p.id === id);
+  if (!product) {
+    document.getElementById('product-detail')?.remove();
+    const main = document.querySelector('main') || document.body;
+    main.innerHTML = '<div class="container" style="padding:4rem 1rem;text-align:center"><h2>Product not found</h2><a href="shop.html" class="btn btn-primary" style="margin-top:1rem">Back to Shop</a></div>';
+    return;
   }
 
-  // Main image
-  const mainImg = document.getElementById("product-main-img");
+  // Breadcrumb
+  const bc = document.getElementById('breadcrumb-product');
+  if (bc) bc.textContent = product.name;
+
+  // Title & meta
+  document.title = `${product.name} — Paddles Peak`;
+  const nameEl = document.getElementById('product-name');
+  if (nameEl) nameEl.textContent = product.name;
+
+  const priceEl = document.getElementById('product-price');
+  if (priceEl) priceEl.textContent = `$${product.price.toFixed(2)}`;
+
+  const descEl = document.getElementById('product-short-desc');
+  if (descEl) descEl.textContent = product.shortDesc;
+
+  const starsEl = document.getElementById('product-stars');
+  if (starsEl) starsEl.innerHTML = renderStars(product.rating);
+
+  const rcEl = document.getElementById('product-review-count');
+  if (rcEl) rcEl.textContent = `(${product.reviewCount} reviews)`;
+
+  // Badge
+  if (product.badge) {
+    const badgeEl = document.getElementById('product-badge');
+    if (badgeEl) { badgeEl.textContent = product.badge; badgeEl.style.display = 'inline-block'; }
+  }
+
+  // Gallery
+  const mainImg = document.getElementById('product-main-img');
   if (mainImg) {
-    mainImg.src = product.images[0];
+    mainImg.src = product.primaryImage;
     mainImg.alt = product.name;
   }
-
-  // Thumbnails
-  const thumbContainer = document.getElementById("product-thumbs");
-  if (thumbContainer) {
-    thumbContainer.innerHTML = product.images
-      .map(
-        (img, i) =>
-          `<img src="${img}" alt="${product.name} view ${i + 1}" class="thumb${i === 0 ? " active" : ""}" data-src="${img}">`
-      )
-      .join("");
-    thumbContainer.querySelectorAll(".thumb").forEach((thumb) => {
-      thumb.addEventListener("click", () => {
-        if (mainImg) {
-          mainImg.src = thumb.dataset.src;
-        }
-        thumbContainer.querySelectorAll(".thumb").forEach((t) => t.classList.remove("active"));
-        thumb.classList.add("active");
-      });
-    });
-  }
-
-  // Specs
-  const specsEl = document.getElementById("product-specs-table");
-  if (specsEl) {
-    specsEl.innerHTML = Object.entries(product.specs)
-      .map(([k, v]) => `<tr><td class="spec-key">${capitalize(k)}</td><td class="spec-val">${v}</td></tr>`)
-      .join("");
-  }
-
-  // Quantity
-  const qtyInput = document.getElementById("qty-input");
-  const qtyMinus = document.getElementById("qty-minus");
-  const qtyPlus = document.getElementById("qty-plus");
-  if (qtyInput && qtyMinus && qtyPlus) {
-    qtyMinus.addEventListener("click", () => {
-      const v = parseInt(qtyInput.value);
-      if (v > 1) qtyInput.value = v - 1;
-    });
-    qtyPlus.addEventListener("click", () => {
-      qtyInput.value = parseInt(qtyInput.value) + 1;
-    });
-  }
-
-  // Add to cart
-  const addBtn = document.getElementById("add-to-cart-btn");
-  if (addBtn) {
-    addBtn.addEventListener("click", () => {
-      const qty = parseInt(qtyInput ? qtyInput.value : 1);
-      addToCart(product.id, qty);
-      addBtn.textContent = "Added to Cart!";
-      addBtn.classList.add("added");
-      setTimeout(() => {
-        addBtn.textContent = "Add to Cart";
-        addBtn.classList.remove("added");
-      }, 2000);
-    });
+  const thumbsEl = document.getElementById('product-thumbs');
+  if (thumbsEl) {
+    thumbsEl.innerHTML = product.images.map((img, i) => `
+      <img src="${img}" alt="${product.name} view ${i+1}" class="product-thumb ${i === 0 ? 'active' : ''}"
+           onclick="setMainImage('${img}', this)">
+    `).join('');
   }
 
   // Tabs
-  const tabBtns = document.querySelectorAll(".tab-btn");
-  const tabPanels = document.querySelectorAll(".tab-panel");
-  tabBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      tabBtns.forEach((b) => b.classList.remove("active"));
-      tabPanels.forEach((p) => p.classList.remove("active"));
-      btn.classList.add("active");
-      const panel = document.getElementById("tab-" + btn.dataset.tab);
-      if (panel) panel.classList.add("active");
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      tabBtns.forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const panel = document.getElementById('tab-' + btn.dataset.tab);
+      if (panel) panel.classList.add('active');
     });
+  });
+
+  // Description tab
+  const descTab = document.getElementById('tab-description');
+  if (descTab) descTab.innerHTML = `<p>${product.description}</p>`;
+
+  // Specs tab
+  const specsTab = document.getElementById('tab-specs');
+  if (specsTab) {
+    specsTab.innerHTML = '<table class="specs-table">' +
+      Object.entries(product.specs).map(([k, v]) =>
+        `<tr><th>${k}</th><td>${v}</td></tr>`
+      ).join('') + '</table>';
+  }
+
+  // Reviews tab
+  const reviewsTab = document.getElementById('tab-reviews');
+  if (reviewsTab) {
+    reviewsTab.innerHTML = `
+      <div class="review-summary">
+        <div class="review-score">${product.rating}</div>
+        <div>${renderStars(product.rating)}</div>
+        <div class="review-total">${product.reviewCount} reviews</div>
+      </div>
+      <div class="review-list">
+        <div class="review-item">
+          <div class="review-stars">${renderStars(5)}</div>
+          <p class="review-text">"Game-changer for my spins. The carbon fiber grip on the ball is insane."</p>
+          <div class="review-author">— Marcus T., Verified Buyer</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">${renderStars(5)}</div>
+          <p class="review-text">"Best paddle I've owned. Performs like paddles costing 3x the price."</p>
+          <div class="review-author">— Sarah L., Verified Buyer</div>
+        </div>
+        <div class="review-item">
+          <div class="review-stars">${renderStars(4)}</div>
+          <p class="review-text">"Great control and power. Shipping was fast too. Highly recommend."</p>
+          <div class="review-author">— Ryan K., Verified Buyer</div>
+        </div>
+      </div>`;
+  }
+
+  // Qty selector
+  let qty = 1;
+  const qtyDisplay = document.getElementById('qty-display');
+  document.getElementById('qty-minus')?.addEventListener('click', () => {
+    if (qty > 1) { qty--; if (qtyDisplay) qtyDisplay.textContent = qty; }
+  });
+  document.getElementById('qty-plus')?.addEventListener('click', () => {
+    qty++;
+    if (qtyDisplay) qtyDisplay.textContent = qty;
+  });
+
+  // Add to cart
+  document.getElementById('btn-add-cart')?.addEventListener('click', () => {
+    addToCart(product.id, qty);
   });
 
   // Related products
-  const relatedGrid = document.getElementById("related-grid");
-  if (relatedGrid) {
-    const related = PRODUCTS.filter((p) => p.id !== product.id);
-    renderProductCards(relatedGrid, related);
-  }
-
-  // Wishlist
-  const wishBtn = document.getElementById("wishlist-btn");
-  if (wishBtn) {
-    wishBtn.addEventListener("click", () => {
-      wishBtn.classList.toggle("wishlisted");
-      wishBtn.textContent = wishBtn.classList.contains("wishlisted") ? "♥ Wishlisted" : "♡ Add to Wishlist";
-    });
-  }
+  const related = PRODUCTS.filter(p => p.id !== product.id);
+  renderProductCards(related, 'related-products-grid');
 }
 
-// ── Cart Page ────────────────────────────────────────────────────
+function setMainImage(src, thumbEl) {
+  const mainImg = document.getElementById('product-main-img');
+  if (mainImg) mainImg.src = src;
+  document.querySelectorAll('.product-thumb').forEach(t => t.classList.remove('active'));
+  if (thumbEl) thumbEl.classList.add('active');
+}
+
+/* ── SHOP PAGE ── */
+function initShopPage() {
+  let current = [...PRODUCTS];
+
+  function render() {
+    renderProductCards(current, 'shop-grid');
+  }
+
+  const sortEl = document.getElementById('sort-select');
+  if (sortEl) {
+    sortEl.addEventListener('change', () => {
+      const val = sortEl.value;
+      if (val === 'price-asc') current.sort((a, b) => a.price - b.price);
+      else if (val === 'price-desc') current.sort((a, b) => b.price - a.price);
+      else current = [...PRODUCTS];
+      render();
+    });
+  }
+
+  render();
+}
+
+/* ── CART PAGE ── */
 function initCartPage() {
-  renderCartPage();
-}
+  function renderCart() {
+    const cart = getCart();
+    const empty = document.getElementById('cart-empty');
+    const filled = document.getElementById('cart-filled');
+    if (!cart.length) {
+      if (empty) empty.style.display = 'block';
+      if (filled) filled.style.display = 'none';
+      return;
+    }
+    if (empty) empty.style.display = 'none';
+    if (filled) filled.style.display = 'block';
 
-function renderCartPage() {
-  const cart = getCart();
-  const tbody = document.getElementById("cart-tbody");
-  const emptyMsg = document.getElementById("cart-empty");
-  const cartContent = document.getElementById("cart-content");
-
-  if (cart.length === 0) {
-    if (emptyMsg) emptyMsg.style.display = "block";
-    if (cartContent) cartContent.style.display = "none";
-    return;
+    const itemsEl = document.getElementById('cart-items');
+    if (itemsEl) {
+      itemsEl.innerHTML = cart.map(item => {
+        const p = PRODUCTS.find(pr => pr.id === item.id);
+        if (!p) return '';
+        return `
+          <tr class="cart-row" data-id="${p.id}">
+            <td class="cart-img-cell">
+              <img src="${p.primaryImage}" alt="${p.name}" class="cart-item-img">
+            </td>
+            <td class="cart-info-cell">
+              <div class="cart-item-name">${p.name}</div>
+              <div class="cart-item-desc">${p.shortDesc}</div>
+            </td>
+            <td class="cart-qty-cell">
+              <div class="qty-control">
+                <button class="qty-btn" onclick="changeQty('${p.id}', ${item.qty - 1})">−</button>
+                <span class="qty-val">${item.qty}</span>
+                <button class="qty-btn" onclick="changeQty('${p.id}', ${item.qty + 1})">+</button>
+              </div>
+            </td>
+            <td class="cart-price-cell">$${(p.price * item.qty).toFixed(2)}</td>
+            <td class="cart-remove-cell">
+              <button class="cart-remove-btn" onclick="removeFromCart('${p.id}'); renderCartSummary();" title="Remove">×</button>
+            </td>
+          </tr>`;
+      }).join('');
+    }
+    renderCartSummary();
   }
-  if (emptyMsg) emptyMsg.style.display = "none";
-  if (cartContent) cartContent.style.display = "grid";
 
-  if (!tbody) return;
+  window.changeQty = function(id, qty) {
+    updateCartQty(id, qty);
+    renderCart();
+  };
 
-  tbody.innerHTML = cart
-    .map((item) => {
-      const p = PRODUCTS.find((pr) => pr.id === item.id);
-      if (!p) return "";
-      const lineTotal = (p.price * item.qty).toFixed(2);
-      return `
-      <tr data-id="${p.id}">
-        <td class="cart-product-cell">
-          <div class="cart-product-img" style="background-image:url('${p.image}')"></div>
-          <div>
-            <a href="/product.html?id=${p.id}" class="cart-product-name">${p.name}</a>
-            <p class="cart-product-cat">${p.category}</p>
-          </div>
-        </td>
-        <td>$${p.price.toFixed(2)}</td>
-        <td>
-          <div class="qty-control">
-            <button class="qty-btn cart-qty-minus" data-id="${p.id}">−</button>
-            <input type="number" class="cart-qty-input" value="${item.qty}" min="1" data-id="${p.id}">
-            <button class="qty-btn cart-qty-plus" data-id="${p.id}">+</button>
-          </div>
-        </td>
-        <td class="cart-line-total">$${lineTotal}</td>
-        <td><button class="btn-remove-cart" data-id="${p.id}">✕</button></td>
-      </tr>`;
-    })
-    .join("");
+  function renderCartSummary() {
+    const cart = getCart();
+    const subtotal = cart.reduce((sum, item) => {
+      const p = PRODUCTS.find(pr => pr.id === item.id);
+      return sum + (p ? p.price * item.qty : 0);
+    }, 0);
+    const shipping = subtotal >= 75 ? 0 : 9.99;
+    const total = subtotal + shipping;
 
-  updateCartSummary();
+    const subEl = document.getElementById('cart-subtotal');
+    const shipEl = document.getElementById('cart-shipping');
+    const totEl = document.getElementById('cart-total');
+    const shipMsg = document.getElementById('cart-shipping-msg');
 
-  // Attach events
-  tbody.querySelectorAll(".cart-qty-minus").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = parseInt(btn.dataset.id);
-      const item = getCart().find((i) => i.id === id);
-      if (item) updateCartQty(id, item.qty - 1);
-      renderCartPage();
-    });
-  });
-  tbody.querySelectorAll(".cart-qty-plus").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const id = parseInt(btn.dataset.id);
-      const item = getCart().find((i) => i.id === id);
-      if (item) updateCartQty(id, item.qty + 1);
-      renderCartPage();
-    });
-  });
-  tbody.querySelectorAll(".cart-qty-input").forEach((input) => {
-    input.addEventListener("change", () => {
-      updateCartQty(parseInt(input.dataset.id), parseInt(input.value) || 1);
-      renderCartPage();
-    });
-  });
-  tbody.querySelectorAll(".btn-remove-cart").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      removeFromCart(parseInt(btn.dataset.id));
-      renderCartPage();
-    });
-  });
-}
+    if (subEl) subEl.textContent = `$${subtotal.toFixed(2)}`;
+    if (shipEl) shipEl.textContent = shipping === 0 ? 'FREE' : `$${shipping.toFixed(2)}`;
+    if (totEl) totEl.textContent = `$${total.toFixed(2)}`;
+    if (shipMsg) shipMsg.style.display = subtotal > 0 && subtotal < 75 ? 'block' : 'none';
+  }
 
-function updateCartSummary() {
-  const cart = getCart();
-  let subtotal = 0;
-  cart.forEach((item) => {
-    const p = PRODUCTS.find((pr) => pr.id === item.id);
-    if (p) subtotal += p.price * item.qty;
-  });
-  const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + shipping + tax;
+  renderCart();
 
-  setText("cart-subtotal", `$${subtotal.toFixed(2)}`);
-  setText("cart-shipping", shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`);
-  setText("cart-tax", `$${tax.toFixed(2)}`);
-  setText("cart-total", `$${total.toFixed(2)}`);
-
-  const shippingNote = document.getElementById("shipping-note");
-  if (shippingNote) {
-    shippingNote.textContent =
-      shipping === 0
-        ? "✓ You qualify for free shipping!"
-        : `Add $${(FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2)} more for free shipping`;
-    shippingNote.className = shipping === 0 ? "shipping-note good" : "shipping-note";
+  // Re-render on remove (removeFromCart triggers updateCartBadge but not renderCart)
+  const origRemove = window.removeFromCart;
+  if (origRemove) {
+    window.removeFromCart = function(id) {
+      origRemove(id);
+      renderCart();
+    };
   }
 }
 
-// ── Checkout ─────────────────────────────────────────────────────
-function initCheckout() {
+/* ── CHECKOUT PAGE ── */
+function initCheckoutPage() {
   let currentStep = 1;
-  const steps = document.querySelectorAll(".checkout-step");
-  const stepIndicators = document.querySelectorAll(".step-indicator");
+  const steps = [1, 2, 3];
 
-  function goToStep(n) {
-    currentStep = n;
-    steps.forEach((s, i) => s.classList.toggle("active", i + 1 === n));
-    stepIndicators.forEach((s, i) => {
-      s.classList.toggle("active", i + 1 === n);
-      s.classList.toggle("done", i + 1 < n);
-    });
-    window.scrollTo(0, 0);
-  }
-
-  // Order summary in checkout
-  renderCheckoutSummary();
-
-  const nextBtns = document.querySelectorAll(".btn-next-step");
-  nextBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const form = btn.closest(".checkout-step");
-      if (form && !validateStep(form)) return;
-      goToStep(currentStep + 1);
-    });
-  });
-
-  const backBtns = document.querySelectorAll(".btn-prev-step");
-  backBtns.forEach((btn) => {
-    btn.addEventListener("click", () => goToStep(currentStep - 1));
-  });
-
-  // Place order
-  const placeBtn = document.getElementById("place-order-btn");
-  if (placeBtn) {
-    placeBtn.addEventListener("click", () => {
-      const contact = gatherFormData("step1-form");
-      const payment = gatherFormData("step2-form");
-      const cart = getCart();
-      let total = 0;
-      const items = cart.map((item) => {
-        const p = PRODUCTS.find((pr) => pr.id === item.id);
-        if (p) total += p.price * item.qty;
-        return { id: item.id, name: p ? p.name : item.id, qty: item.qty, price: p ? p.price : 0 };
-      });
-      const shipping = total > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-      const tax = total * TAX_RATE;
-      total = total + shipping + tax;
-
-      const order = placeOrder({ contact, items, subtotal: total - shipping - tax, shipping, tax, total });
-
-      const modal = document.getElementById("order-success-modal");
-      if (modal) {
-        modal.style.display = "flex";
-        setText("order-number", order.id);
+  function showStep(n) {
+    steps.forEach(s => {
+      const el = document.getElementById('step-' + s);
+      const ind = document.getElementById('step-ind-' + s);
+      if (el) el.style.display = s === n ? 'block' : 'none';
+      if (ind) {
+        ind.classList.toggle('active', s === n);
+        ind.classList.toggle('done', s < n);
       }
     });
+    currentStep = n;
   }
 
-  const closeModal = document.getElementById("close-order-modal");
-  if (closeModal) {
-    closeModal.addEventListener("click", () => {
-      window.location.href = "/index.html";
-    });
-  }
+  showStep(1);
 
-  // Credit card visual
-  const cardNum = document.getElementById("card-number");
-  const cardDisplay = document.getElementById("card-number-display");
-  if (cardNum && cardDisplay) {
-    cardNum.addEventListener("input", () => {
-      const v = cardNum.value.replace(/\D/g, "").slice(0, 16);
-      cardNum.value = v.replace(/(.{4})/g, "$1 ").trim();
-      cardDisplay.textContent = v.padEnd(16, "•").replace(/(.{4})/g, "$1 ").trim();
-    });
-  }
+  document.getElementById('btn-to-step2')?.addEventListener('click', () => {
+    const form = document.getElementById('form-shipping');
+    if (form && !form.checkValidity()) { form.reportValidity(); return; }
+    showStep(2);
+  });
 
-  const cardName = document.getElementById("card-name");
-  const cardNameDisplay = document.getElementById("card-name-display");
-  if (cardName && cardNameDisplay) {
-    cardName.addEventListener("input", () => {
-      cardNameDisplay.textContent = cardName.value || "FULL NAME";
-    });
-  }
+  document.getElementById('btn-back-step1')?.addEventListener('click', () => showStep(1));
 
-  const cardExpiry = document.getElementById("card-expiry");
-  const cardExpiryDisplay = document.getElementById("card-expiry-display");
-  if (cardExpiry && cardExpiryDisplay) {
-    cardExpiry.addEventListener("input", () => {
-      cardExpiryDisplay.textContent = cardExpiry.value || "MM/YY";
-    });
-  }
+  document.getElementById('btn-place-order')?.addEventListener('click', () => {
+    const form = document.getElementById('form-payment');
+    if (form && !form.checkValidity()) { form.reportValidity(); return; }
 
-  goToStep(1);
-}
+    const cart = getCart();
+    const customerInfo = {
+      firstName: document.getElementById('ship-first')?.value || '',
+      lastName: document.getElementById('ship-last')?.value || '',
+      email: document.getElementById('ship-email')?.value || '',
+      phone: document.getElementById('ship-phone')?.value || '',
+      address: document.getElementById('ship-address')?.value || '',
+      city: document.getElementById('ship-city')?.value || '',
+      state: document.getElementById('ship-state')?.value || '',
+      zip: document.getElementById('ship-zip')?.value || ''
+    };
 
-function renderCheckoutSummary() {
-  const container = document.getElementById("checkout-summary-items");
-  if (!container) return;
+    const order = createOrder(cart, customerInfo);
+    clearCart();
+
+    const orderIdEl = document.getElementById('confirm-order-id');
+    if (orderIdEl) orderIdEl.textContent = order.id;
+    const orderEmailEl = document.getElementById('confirm-email');
+    if (orderEmailEl) orderEmailEl.textContent = customerInfo.email;
+    const orderTotalEl = document.getElementById('confirm-total');
+    if (orderTotalEl) orderTotalEl.textContent = `$${order.total.toFixed(2)}`;
+
+    showStep(3);
+  });
+
+  // Show cart summary in checkout
   const cart = getCart();
-  let subtotal = 0;
-  container.innerHTML = cart
-    .map((item) => {
-      const p = PRODUCTS.find((pr) => pr.id === item.id);
-      if (!p) return "";
+  const summaryEl = document.getElementById('checkout-summary-items');
+  if (summaryEl) {
+    let subtotal = 0;
+    summaryEl.innerHTML = cart.map(item => {
+      const p = PRODUCTS.find(pr => pr.id === item.id);
+      if (!p) return '';
       subtotal += p.price * item.qty;
-      return `<div class="summary-item">
+      return `<div class="checkout-summary-row">
         <span>${p.name} × ${item.qty}</span>
         <span>$${(p.price * item.qty).toFixed(2)}</span>
       </div>`;
-    })
-    .join("");
-  const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
-  const tax = subtotal * TAX_RATE;
-  setText("checkout-subtotal", `$${subtotal.toFixed(2)}`);
-  setText("checkout-shipping", shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`);
-  setText("checkout-tax", `$${tax.toFixed(2)}`);
-  setText("checkout-total", `$${(subtotal + shipping + tax).toFixed(2)}`);
+    }).join('');
+    const shipping = subtotal >= 75 ? 0 : 9.99;
+    summaryEl.innerHTML += `
+      <div class="checkout-summary-row checkout-summary-divider">
+        <span>Shipping</span><span>${shipping === 0 ? 'FREE' : '$' + shipping.toFixed(2)}</span>
+      </div>
+      <div class="checkout-summary-row checkout-summary-total">
+        <span>Total</span><span>$${(subtotal + shipping).toFixed(2)}</span>
+      </div>`;
+  }
 }
 
-function validateStep(stepEl) {
-  const inputs = stepEl.querySelectorAll("input[required], select[required]");
-  let valid = true;
-  inputs.forEach((input) => {
-    if (!input.value.trim()) {
-      input.classList.add("invalid");
-      valid = false;
-    } else {
-      input.classList.remove("invalid");
-    }
-  });
-  return valid;
-}
+/* ── ADMIN PAGE ── */
+function initAdminPage() {
+  const AUTH_KEY = 'ppAdminAuth';
+  const gate = document.getElementById('admin-gate');
+  const dashboard = document.getElementById('admin-dashboard');
 
-function gatherFormData(formId) {
-  const form = document.getElementById(formId);
-  if (!form) return {};
-  const data = {};
-  form.querySelectorAll("input, select, textarea").forEach((el) => {
-    if (el.name) data[el.name] = el.value;
-  });
-  return data;
-}
-
-// ── Admin ─────────────────────────────────────────────────────────
-function initAdmin() {
-  const gate = document.getElementById("admin-gate");
-  const dashboard = document.getElementById("admin-dashboard");
-  const loginForm = document.getElementById("admin-login-form");
-
-  if (sessionStorage.getItem("pp_admin") === "true") {
-    showAdminDashboard();
+  function checkAuth() {
+    return sessionStorage.getItem(AUTH_KEY) === 'true';
   }
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      const pw = document.getElementById("admin-password").value;
-      if (pw === "admin123") {
-        sessionStorage.setItem("pp_admin", "true");
-        showAdminDashboard();
-      } else {
-        const err = document.getElementById("login-error");
-        if (err) err.style.display = "block";
-      }
-    });
-  }
-
-  function showAdminDashboard() {
-    if (gate) gate.style.display = "none";
-    if (dashboard) dashboard.style.display = "block";
+  function showDashboard() {
+    if (gate) gate.style.display = 'none';
+    if (dashboard) dashboard.style.display = 'block';
     renderAdminStats();
     renderInventoryTable();
     renderOrdersTable();
   }
-}
 
-function renderAdminStats() {
-  const orders = getOrders();
-  const revenue = getTotalRevenue();
-  const totalStock = PRODUCTS.reduce((s, p) => s + p.stock, 0);
-  const lowStock = PRODUCTS.filter((p) => p.stock < 10).length;
-  setText("stat-orders", orders.length);
-  setText("stat-revenue", `$${revenue.toFixed(2)}`);
-  setText("stat-stock", totalStock);
-  setText("stat-lowstock", lowStock);
-}
-
-function renderInventoryTable() {
-  const tbody = document.getElementById("inventory-tbody");
-  if (!tbody) return;
-  tbody.innerHTML = PRODUCTS.map(
-    (p) => `
-    <tr>
-      <td>${p.id}</td>
-      <td>${p.name}</td>
-      <td>${p.category}</td>
-      <td>$${p.price.toFixed(2)}</td>
-      <td>
-        <div class="stock-edit">
-          <input type="number" class="stock-input" value="${p.stock}" data-id="${p.id}" min="0">
-          ${p.stock < 10 ? '<span class="badge-low">Low Stock</span>' : ""}
-        </div>
-      </td>
-      <td>${renderStars(p.rating)} <small>(${p.reviews})</small></td>
-    </tr>`
-  ).join("");
-
-  tbody.querySelectorAll(".stock-input").forEach((input) => {
-    input.addEventListener("change", () => {
-      const prod = PRODUCTS.find((p) => p.id === parseInt(input.dataset.id));
-      if (prod) {
-        prod.stock = parseInt(input.value) || 0;
-        renderInventoryTable();
-        renderAdminStats();
-      }
-    });
-  });
-}
-
-function renderOrdersTable() {
-  const tbody = document.getElementById("orders-tbody");
-  if (!tbody) return;
-  const orders = getOrders();
-  tbody.innerHTML = "";
-  if (orders.length === 0) {
-    const tr = document.createElement("tr");
-    const td = document.createElement("td");
-    td.colSpan = 6;
-    td.style.cssText = "text-align:center;color:#94a3b8;";
-    td.textContent = "No orders yet";
-    tr.appendChild(td);
-    tbody.appendChild(tr);
-    return;
+  if (checkAuth()) {
+    showDashboard();
+  } else {
+    if (gate) gate.style.display = 'flex';
+    if (dashboard) dashboard.style.display = 'none';
   }
 
-  orders.forEach((o) => {
-    const tr = document.createElement("tr");
-
-    // Order ID
-    const tdId = document.createElement("td");
-    const strong = document.createElement("strong");
-    strong.textContent = o.id || "";
-    tdId.appendChild(strong);
-    tr.appendChild(tdId);
-
-    // Date
-    const tdDate = document.createElement("td");
-    tdDate.textContent = o.date ? new Date(o.date).toLocaleDateString() : "—";
-    tr.appendChild(tdDate);
-
-    // Customer
-    const tdCustomer = document.createElement("td");
-    tdCustomer.textContent =
-      o.contact
-        ? `${o.contact.firstName || ""} ${o.contact.lastName || ""}`.trim() || "—"
-        : "—";
-    tr.appendChild(tdCustomer);
-
-    // Items
-    const tdItems = document.createElement("td");
-    tdItems.textContent = o.items
-      ? o.items.map((i) => `${i.name} ×${i.qty}`).join(", ")
-      : "—";
-    tr.appendChild(tdItems);
-
-    // Total
-    const tdTotal = document.createElement("td");
-    tdTotal.textContent = `$${(o.total || 0).toFixed(2)}`;
-    tr.appendChild(tdTotal);
-
-    // Status select
-    const tdStatus = document.createElement("td");
-    const status = o.status || "Pending";
-    const sel = document.createElement("select");
-    sel.className = `order-status-select status-${status.toLowerCase()}`;
-    sel.dataset.id = o.id;
-    ["Pending", "Shipped", "Delivered"].forEach((s) => {
-      const opt = document.createElement("option");
-      opt.textContent = s;
-      opt.selected = s === status;
-      sel.appendChild(opt);
-    });
-    sel.addEventListener("change", () => {
-      updateOrderStatus(sel.dataset.id, sel.value);
-      sel.className = `order-status-select status-${sel.value.toLowerCase()}`;
-    });
-    tdStatus.appendChild(sel);
-    tr.appendChild(tdStatus);
-
-    tbody.appendChild(tr);
+  document.getElementById('admin-login-btn')?.addEventListener('click', () => {
+    const pw = document.getElementById('admin-password')?.value;
+    if (pw === 'admin123') {
+      sessionStorage.setItem(AUTH_KEY, 'true');
+      showDashboard();
+    } else {
+      const err = document.getElementById('admin-login-error');
+      if (err) { err.textContent = 'Incorrect password.'; err.style.display = 'block'; }
+    }
   });
+
+  document.getElementById('admin-signout-btn')?.addEventListener('click', () => {
+    sessionStorage.removeItem(AUTH_KEY);
+    if (gate) gate.style.display = 'flex';
+    if (dashboard) dashboard.style.display = 'none';
+  });
+
+  function renderAdminStats() {
+    const orders = getOrders();
+    const totalRevenue = orders.reduce((s, o) => s + o.total, 0);
+    const totalStock = PRODUCTS.reduce((s, p) => s + p.stock, 0);
+    const lowStock = PRODUCTS.filter(p => p.stock < 10).length;
+
+    const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+    set('stat-orders', orders.length);
+    set('stat-revenue', '$' + totalRevenue.toFixed(2));
+    set('stat-stock', totalStock);
+    set('stat-lowstock', lowStock);
+  }
+
+  function renderInventoryTable() {
+    const tbody = document.getElementById('inventory-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = PRODUCTS.map(p => `
+      <tr class="${p.stock < 10 ? 'low-stock-row' : ''}">
+        <td>${p.name}</td>
+        <td>$${p.price.toFixed(2)}</td>
+        <td>
+          <input type="number" class="stock-input" value="${p.stock}" min="0"
+                 onchange="updateStock('${p.id}', this.value)">
+          ${p.stock < 10 ? '<span class="low-stock-badge">Low Stock</span>' : ''}
+        </td>
+        <td>${p.rating} ★ (${p.reviewCount})</td>
+      </tr>
+    `).join('');
+  }
+
+  window.updateStock = function(id, val) {
+    const p = PRODUCTS.find(pr => pr.id === id);
+    if (p) {
+      p.stock = parseInt(val) || 0;
+      renderInventoryTable();
+      renderAdminStats();
+    }
+  };
+
+  function renderOrdersTable() {
+    const tbody = document.getElementById('orders-tbody');
+    if (!tbody) return;
+    const orders = getOrders();
+    if (!orders.length) {
+      tbody.innerHTML = '<tr><td colspan="6" class="empty-table">No orders yet.</td></tr>';
+      return;
+    }
+    tbody.innerHTML = orders.map(o => `
+      <tr>
+        <td><code>${o.id}</code></td>
+        <td>${new Date(o.date).toLocaleDateString()}</td>
+        <td>${o.customer ? o.customer.firstName + ' ' + o.customer.lastName : '—'}</td>
+        <td>${o.items.map(i => `${i.name} ×${i.qty}`).join(', ')}</td>
+        <td>$${o.total.toFixed(2)}</td>
+        <td>
+          <select class="status-select" onchange="updateOrderStatus('${o.id}', this.value)">
+            ${['Pending','Processing','Shipped','Delivered'].map(s =>
+              `<option value="${s}" ${o.status === s ? 'selected' : ''}>${s}</option>`
+            ).join('')}
+          </select>
+        </td>
+      </tr>
+    `).join('');
+  }
 }
 
-// ── Utilities ─────────────────────────────────────────────────────
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
+/* ── HOME PAGE ── */
+function initHomePage() {
+  renderProductCards(PRODUCTS, 'products-grid');
 }
 
-function capitalize(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1).replace(/([A-Z])/g, " $1");
-}
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  initCartBadge();
+  initNavToggle();
+
+  const path = window.location.pathname;
+  const page = path.split('/').pop() || 'index.html';
+
+  if (page === 'index.html' || page === '' || page === '/') {
+    initHomePage();
+  } else if (page === 'shop.html') {
+    initShopPage();
+  } else if (page === 'product.html') {
+    initProductPage();
+  } else if (page === 'cart.html') {
+    initCartPage();
+  } else if (page === 'checkout.html') {
+    initCheckoutPage();
+  } else if (page === 'admin.html') {
+    initAdminPage();
+  }
+});

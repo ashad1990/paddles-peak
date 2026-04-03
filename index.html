@@ -3,38 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paddles Peak — Reach New Heights in Every Rally</title>
+  <title>Paddles Peak — Premium Pickleball Paddles</title>
   <meta name="description" content="Premium pickleball paddles engineered for champions. Raw carbon fiber face, polymer honeycomb core. USAPA approved.">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
 
 <!-- NAVBAR -->
 <nav class="navbar" id="navbar">
   <div class="nav-container">
-    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
-    <div id="nav-menu" class="nav-menu">
-      <a href="/shop.html">Shop</a>
+    <a href="index.html" class="nav-logo">PADDLES <span class="logo-peak">PEAK</span></a>
+    <div class="nav-links" id="nav-links">
+      <a href="shop.html">Shop</a>
       <a href="#features">Features</a>
       <a href="#testimonials">Reviews</a>
       <a href="#about">About</a>
     </div>
-    <div class="nav-cart">
-      <a href="/cart.html">
-        <button class="nav-cart-btn" aria-label="Shopping cart">
-          🛒 Cart
-          <span class="cart-badge" id="cart-badge-nav">0</span>
-        </button>
+    <div class="nav-right">
+      <a href="cart.html" class="nav-cart-link" aria-label="Shopping cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-badge" id="cart-badge-nav">0</span>
       </a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
     </div>
-    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
   </div>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
   <div class="hero-bg">
-    <!-- SVG Mountain Aurora Scene -->
     <svg class="hero-svg" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -60,18 +57,11 @@
           <stop offset="0%" style="stop-color:#091520" />
           <stop offset="100%" style="stop-color:#030a0f" />
         </linearGradient>
-        <filter id="glow">
-          <feGaussianBlur stdDeviation="4" result="blur"/>
-          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-        </filter>
       </defs>
-      <!-- Sky -->
       <rect width="1440" height="800" fill="url(#skyGrad)"/>
-      <!-- Aurora bands -->
       <ellipse cx="720" cy="200" rx="800" ry="180" fill="url(#aurora1)" opacity="0.7"/>
       <ellipse cx="400" cy="250" rx="600" ry="120" fill="url(#aurora2)" opacity="0.6"/>
       <ellipse cx="1100" cy="180" rx="500" ry="100" fill="url(#aurora1)" opacity="0.5"/>
-      <!-- Stars -->
       <circle cx="120" cy="60" r="1.2" fill="#2dd4bf" opacity="0.6"/>
       <circle cx="350" cy="40" r="0.8" fill="white" opacity="0.5"/>
       <circle cx="580" cy="90" r="1" fill="white" opacity="0.4"/>
@@ -83,13 +73,9 @@
       <circle cx="480" cy="130" r="1" fill="#2dd4bf" opacity="0.4"/>
       <circle cx="1050" cy="120" r="0.8" fill="white" opacity="0.35"/>
       <circle cx="1300" cy="140" r="1.2" fill="#2dd4bf" opacity="0.4"/>
-      <!-- Far mountains (lightest) -->
       <polygon points="0,600 100,400 200,500 350,320 500,450 650,360 800,470 900,380 1050,440 1200,330 1350,420 1440,370 1440,800 0,800" fill="url(#mtnGrad2)" opacity="0.5"/>
-      <!-- Mid mountains -->
       <polygon points="0,700 150,480 280,560 420,400 560,500 700,420 820,510 970,430 1100,500 1250,400 1380,480 1440,440 1440,800 0,800" fill="url(#mtnGrad1)" opacity="0.8"/>
-      <!-- Foreground mountains -->
       <polygon points="0,800 0,650 120,500 220,580 380,460 480,540 600,480 700,540 820,460 960,530 1080,460 1200,520 1330,470 1440,510 1440,800" fill="#060e14"/>
-      <!-- Teal glow on mountain peaks -->
       <polygon points="380,460 420,400 460,460" fill="#2dd4bf" opacity="0.06"/>
       <polygon points="600,480 640,420 680,480" fill="#2dd4bf" opacity="0.05"/>
       <polygon points="820,460 860,400 900,460" fill="#2dd4bf" opacity="0.06"/>
@@ -97,243 +83,161 @@
     </svg>
     <div class="hero-gradient"></div>
   </div>
-
   <div class="hero-content">
     <div class="hero-text">
-      <p class="hero-eyebrow">⛰ Engineered for Champions</p>
-      <h1 class="hero-title">
-        Reach New <span class="highlight">Heights</span><br>
-        in Every Rally
-      </h1>
-      <p class="hero-sub">
-        Raw carbon fiber face. Polymer honeycomb core. Built for players who demand elite spin, control, and power — USAPA approved from day one.
-      </p>
-      <div class="hero-actions">
-        <a href="/shop.html" class="btn btn-teal btn-xl">Shop Now</a>
-        <a href="#features" class="btn btn-outline btn-xl">Our Tech</a>
-      </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-num">4.9★</div>
-          <div class="hero-stat-label">Avg Rating</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">2,000+</div>
-          <div class="hero-stat-label">Players</div>
-        </div>
-        <div class="hero-stat">
-          <div class="hero-stat-num">USAPA</div>
-          <div class="hero-stat-label">Approved</div>
-        </div>
+      <span class="hero-eyebrow">⛰ Premium Pickleball Gear</span>
+      <h1>Reach New Heights in Every Rally</h1>
+      <p>Raw carbon fiber face. Polymer honeycomb core. USAPA approved. Built for champions — priced for everyone.</p>
+      <div class="hero-btns">
+        <a href="shop.html" class="btn btn-primary btn-lg">Shop Now</a>
+        <a href="product.html?id=base-camp-bundle" class="btn btn-outline-light btn-lg">View Bundle</a>
       </div>
     </div>
-
-    <div class="hero-visual">
-      <div class="hero-glow-ring"></div>
-      <div class="hero-paddle-display">
-        <img src="/images/paddle-main.jpg" alt="Paddles Peak Summit Paddle — teal mountain aurora graphic"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-        <div class="hero-paddle-fallback" style="display:none">
-          <!-- Paddle SVG art fallback -->
-          <svg width="120" height="160" viewBox="0 0 120 160" class="hero-paddle-svg" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="30" y="70" width="60" height="85" rx="4" fill="none" stroke="currentColor" stroke-width="2"/>
-            <ellipse cx="60" cy="55" rx="35" ry="42" fill="none" stroke="currentColor" stroke-width="2"/>
-            <path d="M30 70 Q60 20 90 70" fill="rgba(45,212,191,0.15)" stroke="none"/>
-            <path d="M25 65 Q40 30 60 20 Q80 30 95 65" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
-            <line x1="30" y1="90" x2="90" y2="90" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
-            <line x1="28" y1="105" x2="92" y2="105" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
-            <line x1="30" y1="120" x2="90" y2="120" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
-            <line x1="50" y1="70" x2="50" y2="155" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
-            <line x1="70" y1="70" x2="70" y2="155" stroke="currentColor" stroke-width="0.75" opacity="0.3"/>
-          </svg>
-          <div class="hero-paddle-name">PADDLES PEAK</div>
-        </div>
-      </div>
+    <div class="hero-img-wrap">
+      <img src="images/paddle-hand.png" alt="Paddles Peak Summit Paddle" class="hero-img">
     </div>
   </div>
 </section>
 
-<!-- PRODUCT COLLECTION -->
-<section class="section" id="collection">
+<!-- SOCIAL PROOF BAR -->
+<div class="proof-bar">
+  <div class="proof-bar-inner">
+    <div class="proof-item"><span class="proof-icon">⭐</span> <strong>4.8/5</strong>&nbsp;Average Rating</div>
+    <div class="proof-item"><span class="proof-icon">🏆</span> <strong>USAPA Approved</strong></div>
+    <div class="proof-item"><span class="proof-icon">🚚</span> <strong>Free Shipping</strong>&nbsp;Over $75</div>
+    <div class="proof-item"><span class="proof-icon">↩️</span> <strong>30-Day Returns</strong></div>
+  </div>
+</div>
+
+<!-- PRODUCTS SECTION -->
+<section class="section section-white" id="shop">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Our Collection</h2>
-      <span class="accent-line"></span>
-      <p class="section-sub">From recreational players to competitive pros — find your edge</p>
+      <span class="section-tag">Our Products</span>
+      <h2>Built for the Court</h2>
+      <p>Handcrafted for champions. Two products, zero compromise.</p>
     </div>
-    <div class="products-grid" id="products-grid">
-      <!-- Populated by main.js -->
-    </div>
+    <div class="products-grid" id="products-grid"></div>
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="section section-dark" id="features">
+<!-- FEATURES SECTION -->
+<section class="section section-light" id="features">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">Why Choose Paddles Peak?</h2>
-      <span class="accent-line"></span>
-      <p class="section-sub">Championship-level technology in every paddle</p>
+      <span class="section-tag">Why Paddles Peak</span>
+      <h2>Why Paddles Peak?</h2>
+      <p>Every element is engineered to give you the competitive edge on every point.</p>
     </div>
     <div class="features-grid">
-      <div class="feature-card" data-reveal>
+      <div class="feature-card">
         <div class="feature-icon">🏔️</div>
-        <div class="feature-title">Raw Carbon Fiber Face</div>
-        <p class="feature-desc">Elite-level spin and control with our textured raw carbon fiber surface — the same material used by touring professionals.</p>
+        <h3>Carbon Fiber Face</h3>
+        <p>Raw T700 carbon for elite spin &amp; control on every shot.</p>
       </div>
-      <div class="feature-card" data-reveal>
+      <div class="feature-card">
         <div class="feature-icon">⚡</div>
-        <div class="feature-title">Polymer Honeycomb Core</div>
-        <p class="feature-desc">Explosive power meets unmatched feel. Our 16mm polypropylene honeycomb core absorbs vibration and delivers consistent pop.</p>
+        <h3>Honeycomb Core</h3>
+        <p>Polymer core for explosive power and unmatched feel.</p>
       </div>
-      <div class="feature-card" data-reveal>
-        <div class="feature-icon">🎯</div>
-        <div class="feature-title">Oversized Sweet Spot</div>
-        <p class="feature-desc">Forgiveness on every shot. The extended hitting surface means more power and control, even on off-center strikes.</p>
+      <div class="feature-card">
+        <div class="feature-icon">��</div>
+        <h3>Oversized Sweet Spot</h3>
+        <p>Forgiveness on every shot — even off-center contact.</p>
       </div>
-      <div class="feature-card" data-reveal>
-        <div class="feature-icon">👜</div>
-        <div class="feature-title">Premium Carry Case</div>
-        <p class="feature-desc">Protect your investment. Our padded carry case with mesh pocket keeps your paddle game-ready wherever you go.</p>
-      </div>
-    </div>
-    <div class="text-center mt-3">
-      <a href="/shop.html" class="btn btn-teal btn-lg">Shop the Collection</a>
-    </div>
-  </div>
-</section>
-
-<!-- BRAND BANNER -->
-<section class="section" id="about" style="padding: 4rem 1.5rem; background: linear-gradient(135deg, #0a0f14 0%, #0d1a22 50%, #0a0f14 100%); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
-  <div class="container text-center">
-    <p style="font-size:0.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:0.75rem;">Our Promise</p>
-    <h2 class="section-title" style="max-width:700px;margin:0 auto 1rem;">"Engineered for Champions. Priced for Everyone."</h2>
-    <p style="max-width:600px;margin:0 auto 2rem;font-size:1.05rem;color:var(--text-secondary);line-height:1.7;">
-      Paddles Peak was born on the court. We obsessed over every gram, every texture, every edge — so you can focus on the game. USAPA approved and court-ready from day one.
-    </p>
-    <div style="display:flex;gap:2rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--text-secondary);">
-        <span style="color:var(--accent);">✓</span> USAPA Approved
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--text-secondary);">
-        <span style="color:var(--accent);">✓</span> Free Shipping Over $75
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--text-secondary);">
-        <span style="color:var(--accent);">✓</span> 30-Day Returns
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.9rem;color:var(--text-secondary);">
-        <span style="color:var(--accent);">✓</span> Lifetime Support
+      <div class="feature-card">
+        <div class="feature-icon">✅</div>
+        <h3>USAPA Approved</h3>
+        <p>Tournament-ready out of the box. Play everywhere.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- TESTIMONIALS -->
-<section class="section section-dark" id="testimonials">
+<!-- TESTIMONIALS SECTION -->
+<section class="section section-white" id="testimonials">
   <div class="container">
     <div class="section-header">
-      <h2 class="section-title">What Players Are Saying</h2>
-      <span class="accent-line"></span>
+      <span class="section-tag">Customer Reviews</span>
+      <h2>What Players Are Saying</h2>
     </div>
     <div class="testimonials-grid">
-      <div class="testimonial-card" data-reveal>
-        <span class="testimonial-quote">"</span>
-        <p class="testimonial-text">The spin I get with the Summit Paddle is absolutely insane. I went from a 4.0 to a 4.5 within months of switching. The raw carbon face grabs the ball in a way I've never felt before.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">JM</div>
-          <div>
-            <div class="testimonial-name">Jordan M.</div>
-            <div class="testimonial-location">Austin, TX — 4.5 Player</div>
-          </div>
-          <div style="margin-left:auto;"><span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></span></div>
-        </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"The spin I get with this paddle is insane. Best $90 I've ever spent on pickleball gear."</p>
+        <div class="testimonial-author">Marcus T.</div>
+        <div class="testimonial-verified">✓ Verified Buyer</div>
       </div>
-      <div class="testimonial-card" data-reveal>
-        <span class="testimonial-quote">"</span>
-        <p class="testimonial-text">Got the Base Camp Bundle and it's the best investment I've made in my game. The case is premium quality — fits the paddle perfectly with room for a couple balls. Perfect gift for any pickleball player.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">SL</div>
-          <div>
-            <div class="testimonial-name">Sarah L.</div>
-            <div class="testimonial-location">Denver, CO — Recreational Player</div>
-          </div>
-          <div style="margin-left:auto;"><span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></span></div>
-        </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Got the Base Camp Bundle and it's a steal. The carry case is premium quality and the paddle performs like paddles 3x the price."</p>
+        <div class="testimonial-author">Sarah L.</div>
+        <div class="testimonial-verified">✓ Verified Buyer</div>
       </div>
-      <div class="testimonial-card" data-reveal>
-        <span class="testimonial-quote">"</span>
-        <p class="testimonial-text">Switched from a big-name brand to Paddles Peak and honestly can't believe the value. The feel and control at this price point is remarkable. The mountain graphic looks incredible on the court too.</p>
-        <div class="testimonial-author">
-          <div class="testimonial-avatar">RK</div>
-          <div>
-            <div class="testimonial-name">Ryan K.</div>
-            <div class="testimonial-location">Seattle, WA — Tournament Player</div>
-          </div>
-          <div style="margin-left:auto;"><span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star half">★</span></span></div>
-        </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">⭐⭐⭐⭐⭐</div>
+        <p class="testimonial-text">"Switched from a big brand and never looked back. The control and spin from the carbon fiber face is remarkable."</p>
+        <div class="testimonial-author">Ryan K.</div>
+        <div class="testimonial-verified">✓ Verified Buyer</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUNDLE SECTION -->
+<section class="bundle-section" id="about">
+  <div class="bundle-inner">
+    <div class="bundle-img-wrap">
+      <img src="images/bundle-shot.png" alt="Base Camp Bundle" class="bundle-img">
+    </div>
+    <div class="bundle-text">
+      <h2>The Complete Kit. One Price. 🎒</h2>
+      <div class="bundle-price">$59.99</div>
+      <p class="bundle-includes">Paddle + Carry Case included — everything you need to hit the court.</p>
+      <a href="product.html?id=base-camp-bundle" class="btn btn-white btn-lg">Shop Bundle</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
 <footer class="footer">
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
-      <p class="footer-brand-desc">Engineered for champions. Priced for everyone. Premium pickleball paddles built for players who refuse to compromise.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-btn" aria-label="Instagram">📸</a>
-        <a href="#" class="footer-social-btn" aria-label="Facebook">👥</a>
-        <a href="#" class="footer-social-btn" aria-label="Twitter/X">✗</a>
-        <a href="#" class="footer-social-btn" aria-label="YouTube">▶</a>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <div class="footer-logo">PADDLES <span class="logo-peak">PEAK</span></div>
+      <p class="footer-tagline">Engineered for champions. Priced for everyone.</p>
+      <div class="footer-social">
+        <a href="#">📸 Instagram</a>
+        <a href="#">👥 Facebook</a>
+        <a href="#">🎵 TikTok</a>
       </div>
     </div>
-    <div>
-      <div class="footer-col-title">Shop</div>
-      <div class="footer-col-links">
-        <a href="/shop.html">All Products</a>
-        <a href="/shop.html?filter=paddles">Paddles</a>
-        <a href="/shop.html?filter=bundles">Bundles</a>
-        <a href="/shop.html?filter=accessories">Accessories</a>
-      </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Products</a></li>
+        <li><a href="product.html?id=summit-paddle">Summit Paddle</a></li>
+        <li><a href="product.html?id=base-camp-bundle">Base Camp Bundle</a></li>
+        <li><a href="cart.html">Your Cart</a></li>
+      </ul>
     </div>
-    <div>
-      <div class="footer-col-title">Support</div>
-      <div class="footer-col-links">
-        <a href="#">FAQ</a>
-        <a href="#">Shipping Policy</a>
-        <a href="#">Returns</a>
-        <a href="#">Contact Us</a>
-      </div>
-    </div>
-    <div>
-      <div class="footer-col-title">Company</div>
-      <div class="footer-col-links">
-        <a href="#about">About</a>
-        <a href="#">Blog</a>
-        <a href="#">Ambassadors</a>
-        <a href="/admin.html">Admin</a>
-      </div>
+    <div class="footer-col">
+      <h4>Info</h4>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <p>© 2025 Paddles Peak. All rights reserved.</p>
-    <span class="footer-usapa">✓ USAPA Approved Products</span>
   </div>
 </footer>
 
-<!-- Scroll reveal init -->
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); }});
-  }, { threshold: 0.1 });
-  document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
-</script>
-
-<script src="/js/products.js"></script>
-<script src="/js/cart.js"></script>
-<script src="/js/orders.js"></script>
-<script src="/js/main.js"></script>
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/orders.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>

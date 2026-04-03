@@ -1,20 +1,20 @@
-// Cart stored in localStorage as JSON array: [{id, qty}]
+const CART_KEY = 'ppCart';
 
 function getCart() {
   try {
-    return JSON.parse(localStorage.getItem("pp_cart") || "[]");
+    return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
   } catch {
     return [];
   }
 }
 
 function saveCart(cart) {
-  localStorage.setItem("pp_cart", JSON.stringify(cart));
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
 }
 
 function addToCart(productId, qty = 1) {
   const cart = getCart();
-  const idx = cart.findIndex((item) => item.id === productId);
+  const idx = cart.findIndex(item => item.id === productId);
   if (idx > -1) {
     cart[idx].qty += qty;
   } else {
@@ -22,18 +22,18 @@ function addToCart(productId, qty = 1) {
   }
   saveCart(cart);
   updateCartBadge();
-  showCartToast();
+  showCartToast(productId);
 }
 
 function removeFromCart(productId) {
-  const cart = getCart().filter((item) => item.id !== productId);
+  const cart = getCart().filter(item => item.id !== productId);
   saveCart(cart);
   updateCartBadge();
 }
 
 function updateCartQty(productId, qty) {
   const cart = getCart();
-  const idx = cart.findIndex((item) => item.id === productId);
+  const idx = cart.findIndex(item => item.id === productId);
   if (idx > -1) {
     if (qty <= 0) {
       cart.splice(idx, 1);
@@ -46,7 +46,7 @@ function updateCartQty(productId, qty) {
 }
 
 function clearCart() {
-  localStorage.removeItem("pp_cart");
+  localStorage.removeItem(CART_KEY);
   updateCartBadge();
 }
 
@@ -56,22 +56,27 @@ function getCartCount() {
 
 function updateCartBadge() {
   const count = getCartCount();
-  document.querySelectorAll(".cart-badge").forEach((el) => {
+  document.querySelectorAll('.cart-badge').forEach(el => {
     el.textContent = count;
-    el.style.display = count > 0 ? "flex" : "none";
+    el.style.display = count > 0 ? 'inline-flex' : 'none';
   });
 }
 
-function showCartToast() {
-  let toast = document.getElementById("cart-toast");
+function showCartToast(productId) {
+  const product = (typeof PRODUCTS !== 'undefined')
+    ? PRODUCTS.find(p => p.id === productId)
+    : null;
+  const name = product ? product.name : 'Item';
+
+  let toast = document.getElementById('cart-toast');
   if (!toast) {
-    toast = document.createElement("div");
-    toast.id = "cart-toast";
-    toast.className = "cart-toast";
-    toast.textContent = "Added to cart!";
+    toast = document.createElement('div');
+    toast.id = 'cart-toast';
+    toast.className = 'cart-toast';
     document.body.appendChild(toast);
   }
-  toast.classList.add("show");
-  clearTimeout(showCartToast._timeoutId);
-  showCartToast._timeoutId = setTimeout(() => toast.classList.remove("show"), 2500);
+  toast.innerHTML = `<span class="toast-check">✓</span> <strong>${name}</strong> added to cart`;
+  toast.classList.add('show');
+  clearTimeout(toast._timeout);
+  toast._timeout = setTimeout(() => toast.classList.remove('show'), 3000);
 }
