@@ -1,3 +1,14 @@
+/* ── HTML Escape Utility ── */
+function escapeHtml(str) {
+  if (str == null) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   updateCartBadge();
   initMobileMenu();
@@ -117,6 +128,9 @@ function renderCart() {
   const tax = subtotal * 0.08;
   const total = subtotal + shipping + tax;
 
+  const imgSrc = escapeHtml(item.image || '');
+  const itemName = escapeHtml(item.name || '');
+
   container.innerHTML = `
     <div class="cart-layout">
       <div class="cart-left">
@@ -132,9 +146,9 @@ function renderCart() {
           </thead>
           <tbody id="cart-body">
             <tr>
-              <td><img class="cart-item-img" src="${item.image}" alt="${item.name}"></td>
+              <td><img class="cart-item-img" src="${imgSrc}" alt="${itemName}"></td>
               <td>
-                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-name">${itemName}</div>
                 <div class="cart-item-sub">Summit Paddle + Paddles Peak Carry Case</div>
               </td>
               <td>
@@ -250,12 +264,16 @@ function submitOrder() {
   const tax = total * 0.08;
   const shipping = total >= 50 ? 0 : 5.99;
 
+  const getVal = function (id) {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : '';
+  };
+
   const order = {
     orderNum: orderNum,
     date: new Date().toLocaleDateString(),
-    customer: (document.getElementById('first-name') ? document.getElementById('first-name').value : '') + ' ' +
-              (document.getElementById('last-name') ? document.getElementById('last-name').value : ''),
-    email: document.getElementById('email') ? document.getElementById('email').value : '',
+    customer: (getVal('first-name') + ' ' + getVal('last-name')).trim(),
+    email: getVal('email'),
     items: cart,
     subtotal: total,
     shipping: shipping,
@@ -296,24 +314,29 @@ function renderCheckoutSummary() {
     if (cart.length === 0) {
       itemsEl.innerHTML = '<p style="color:#888;font-size:.85rem;">Cart is empty</p>';
     } else {
-      itemsEl.innerHTML = cart.map(item => `
-        <div class="checkout-item">
-          <img src="${item.image}" alt="${item.name}">
+      itemsEl.innerHTML = cart.map(function (item) {
+        const imgSrc = escapeHtml(item.image || '');
+        const itemName = escapeHtml(item.name || '');
+        return `<div class="checkout-item">
+          <img src="${imgSrc}" alt="${itemName}">
           <div>
-            <div class="checkout-item-name">${item.name}</div>
-            <div class="checkout-item-sub">Qty: ${item.qty}</div>
+            <div class="checkout-item-name">${itemName}</div>
+            <div class="checkout-item-sub">Qty: ${Number(item.qty)}</div>
           </div>
           <div style="margin-left:auto;font-weight:700;color:#111;">$${(item.price * item.qty).toFixed(2)}</div>
-        </div>`).join('');
+        </div>`;
+      }).join('');
     }
   }
 
-  const rows = ['checkout-subtotal', 'checkout-shipping', 'checkout-tax', 'checkout-total'];
-  const vals = [subtotal.toFixed(2), shipping === 0 ? 'Free' : '$' + shipping.toFixed(2), tax.toFixed(2), total.toFixed(2)];
-  rows.forEach(function (id, i) {
-    const el = document.getElementById(id);
-    if (el) el.textContent = (i === 1 ? vals[i] : '$' + vals[i]);
-  });
+  const el = document.getElementById('checkout-subtotal');
+  if (el) el.textContent = '$' + subtotal.toFixed(2);
+  const shipEl = document.getElementById('checkout-shipping');
+  if (shipEl) shipEl.textContent = shipping === 0 ? 'Free' : '$' + shipping.toFixed(2);
+  const taxEl = document.getElementById('checkout-tax');
+  if (taxEl) taxEl.textContent = '$' + tax.toFixed(2);
+  const totalEl = document.getElementById('checkout-total');
+  if (totalEl) totalEl.textContent = '$' + total.toFixed(2);
 }
 
 /* ── Admin Page ── */
@@ -408,21 +431,34 @@ function renderAdminDashboard() {
       tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;padding:32px;color:#888;">No orders yet</td></tr>';
     } else {
       tbody.innerHTML = orders.map(function (o, i) {
+        const orderNum = escapeHtml(o.orderNum || '#' + (i + 1));
+        const date = escapeHtml(o.date || '');
+        const customer = escapeHtml(o.customer || '');
+        const items = escapeHtml(o.items ? o.items.map(function (it) { return it.name + ' x' + it.qty; }).join(', ') : '');
+        const total = (o.total || 0).toFixed(2);
+        const status = o.status || 'Pending';
         return `<tr>
-          <td><strong>${o.orderNum || '#' + (i + 1)}</strong></td>
-          <td>${o.date || ''}</td>
-          <td>${o.customer || ''}</td>
-          <td>${o.items ? o.items.map(it => it.name + ' x' + it.qty).join(', ') : ''}</td>
-          <td><strong>$${(o.total || 0).toFixed(2)}</strong></td>
+          <td><strong>${orderNum}</strong></td>
+          <td>${date}</td>
+          <td>${customer}</td>
+          <td>${items}</td>
+          <td><strong>$${total}</strong></td>
           <td>
-            <select class="status-select" data-idx="${i}" onchange="updateOrderStatus(${i}, this.value)">
-              <option ${o.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option ${o.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
-              <option ${o.status === 'Delivered' ? 'selected' : ''}>Delivered</option>
+            <select class="status-select" data-idx="${i}">
+              <option${status === 'Pending' ? ' selected' : ''}>Pending</option>
+              <option${status === 'Shipped' ? ' selected' : ''}>Shipped</option>
+              <option${status === 'Delivered' ? ' selected' : ''}>Delivered</option>
             </select>
           </td>
         </tr>`;
       }).join('');
+
+      // Attach change listeners after DOM insertion
+      tbody.querySelectorAll('.status-select').forEach(function (sel) {
+        sel.addEventListener('change', function () {
+          updateOrderStatus(parseInt(sel.dataset.idx, 10), sel.value);
+        });
+      });
     }
   }
 }

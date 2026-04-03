@@ -15,6 +15,7 @@ function saveCart(cart) {
 
 function addToCart(qty) {
   qty = qty || 1;
+  if (typeof PRODUCT === 'undefined') return;
   const cart = getCart();
   const idx = cart.findIndex(item => item.id === PRODUCT.id);
   if (idx > -1) {
