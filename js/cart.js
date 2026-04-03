@@ -72,6 +72,6 @@ function showCartToast() {
     document.body.appendChild(toast);
   }
   toast.classList.add("show");
-  clearTimeout(toast._timeout);
-  toast._timeout = setTimeout(() => toast.classList.remove("show"), 2500);
+  clearTimeout(showCartToast._timeoutId);
+  showCartToast._timeoutId = setTimeout(() => toast.classList.remove("show"), 2500);
 }

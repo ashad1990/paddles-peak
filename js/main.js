@@ -2,6 +2,22 @@
 // main.js — Paddles Peak core JS logic
 // =============================================
 
+// ── Constants ─────────────────────────────────────────────────────
+const TAX_RATE = 0.08;
+const FREE_SHIPPING_THRESHOLD = 75;
+const SHIPPING_COST = 9.99;
+
+// ── HTML Sanitizer ────────────────────────────────────────────────
+function escapeHtml(str) {
+  if (str == null) return "";
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   initNav();
   updateCartBadge();
@@ -127,6 +143,16 @@ function initShop() {
   const filterBtns = document.querySelectorAll(".filter-btn");
   const sortSelect = document.getElementById("sort-select");
   let activeFilter = "all";
+
+  // Populate dynamic filter counts from PRODUCTS
+  const countAll = document.getElementById("count-all");
+  const countPaddles = document.getElementById("count-paddles");
+  const countBundles = document.getElementById("count-bundles");
+  const countAccessories = document.getElementById("count-accessories");
+  if (countAll) countAll.textContent = PRODUCTS.length;
+  if (countPaddles) countPaddles.textContent = PRODUCTS.filter((p) => p.category === "paddles").length;
+  if (countBundles) countBundles.textContent = PRODUCTS.filter((p) => p.category === "bundles").length;
+  if (countAccessories) countAccessories.textContent = PRODUCTS.filter((p) => p.category === "accessories").length;
 
   function applyFilterSort() {
     let list = [...PRODUCTS];
@@ -361,8 +387,8 @@ function updateCartSummary() {
     const p = PRODUCTS.find((pr) => pr.id === item.id);
     if (p) subtotal += p.price * item.qty;
   });
-  const shipping = subtotal > 75 ? 0 : 9.99;
-  const tax = subtotal * 0.08;
+  const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const tax = subtotal * TAX_RATE;
   const total = subtotal + shipping + tax;
 
   setText("cart-subtotal", `$${subtotal.toFixed(2)}`);
@@ -375,7 +401,7 @@ function updateCartSummary() {
     shippingNote.textContent =
       shipping === 0
         ? "✓ You qualify for free shipping!"
-        : `Add $${(75 - subtotal).toFixed(2)} more for free shipping`;
+        : `Add $${(FREE_SHIPPING_THRESHOLD - subtotal).toFixed(2)} more for free shipping`;
     shippingNote.className = shipping === 0 ? "shipping-note good" : "shipping-note";
   }
 }
@@ -426,8 +452,8 @@ function initCheckout() {
         if (p) total += p.price * item.qty;
         return { id: item.id, name: p ? p.name : item.id, qty: item.qty, price: p ? p.price : 0 };
       });
-      const shipping = total > 75 ? 0 : 9.99;
-      const tax = total * 0.08;
+      const shipping = total > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+      const tax = total * TAX_RATE;
       total = total + shipping + tax;
 
       const order = placeOrder({ contact, items, subtotal: total - shipping - tax, shipping, tax, total });
@@ -493,8 +519,8 @@ function renderCheckoutSummary() {
       </div>`;
     })
     .join("");
-  const shipping = subtotal > 75 ? 0 : 9.99;
-  const tax = subtotal * 0.08;
+  const shipping = subtotal > FREE_SHIPPING_THRESHOLD ? 0 : SHIPPING_COST;
+  const tax = subtotal * TAX_RATE;
   setText("checkout-subtotal", `$${subtotal.toFixed(2)}`);
   setText("checkout-shipping", shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`);
   setText("checkout-tax", `$${tax.toFixed(2)}`);
@@ -605,35 +631,73 @@ function renderOrdersTable() {
   const tbody = document.getElementById("orders-tbody");
   if (!tbody) return;
   const orders = getOrders();
+  tbody.innerHTML = "";
   if (orders.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#94a3b8;">No orders yet</td></tr>';
+    const tr = document.createElement("tr");
+    const td = document.createElement("td");
+    td.colSpan = 6;
+    td.style.cssText = "text-align:center;color:#94a3b8;";
+    td.textContent = "No orders yet";
+    tr.appendChild(td);
+    tbody.appendChild(tr);
     return;
   }
-  tbody.innerHTML = orders
-    .map(
-      (o) => `
-    <tr>
-      <td><strong>${o.id}</strong></td>
-      <td>${new Date(o.date).toLocaleDateString()}</td>
-      <td>${o.contact ? o.contact.firstName + " " + o.contact.lastName : "—"}</td>
-      <td>${o.items ? o.items.map((i) => `${i.name} ×${i.qty}`).join(", ") : "—"}</td>
-      <td>$${(o.total || 0).toFixed(2)}</td>
-      <td>
-        <select class="order-status-select status-${(o.status || "Pending").toLowerCase()}" data-id="${o.id}">
-          <option ${o.status === "Pending" ? "selected" : ""}>Pending</option>
-          <option ${o.status === "Shipped" ? "selected" : ""}>Shipped</option>
-          <option ${o.status === "Delivered" ? "selected" : ""}>Delivered</option>
-        </select>
-      </td>
-    </tr>`
-    )
-    .join("");
 
-  tbody.querySelectorAll(".order-status-select").forEach((sel) => {
+  orders.forEach((o) => {
+    const tr = document.createElement("tr");
+
+    // Order ID
+    const tdId = document.createElement("td");
+    const strong = document.createElement("strong");
+    strong.textContent = o.id || "";
+    tdId.appendChild(strong);
+    tr.appendChild(tdId);
+
+    // Date
+    const tdDate = document.createElement("td");
+    tdDate.textContent = o.date ? new Date(o.date).toLocaleDateString() : "—";
+    tr.appendChild(tdDate);
+
+    // Customer
+    const tdCustomer = document.createElement("td");
+    tdCustomer.textContent =
+      o.contact
+        ? `${o.contact.firstName || ""} ${o.contact.lastName || ""}`.trim() || "—"
+        : "—";
+    tr.appendChild(tdCustomer);
+
+    // Items
+    const tdItems = document.createElement("td");
+    tdItems.textContent = o.items
+      ? o.items.map((i) => `${i.name} ×${i.qty}`).join(", ")
+      : "—";
+    tr.appendChild(tdItems);
+
+    // Total
+    const tdTotal = document.createElement("td");
+    tdTotal.textContent = `$${(o.total || 0).toFixed(2)}`;
+    tr.appendChild(tdTotal);
+
+    // Status select
+    const tdStatus = document.createElement("td");
+    const status = o.status || "Pending";
+    const sel = document.createElement("select");
+    sel.className = `order-status-select status-${status.toLowerCase()}`;
+    sel.dataset.id = o.id;
+    ["Pending", "Shipped", "Delivered"].forEach((s) => {
+      const opt = document.createElement("option");
+      opt.textContent = s;
+      opt.selected = s === status;
+      sel.appendChild(opt);
+    });
     sel.addEventListener("change", () => {
       updateOrderStatus(sel.dataset.id, sel.value);
       sel.className = `order-status-select status-${sel.value.toLowerCase()}`;
     });
+    tdStatus.appendChild(sel);
+    tr.appendChild(tdStatus);
+
+    tbody.appendChild(tr);
   });
 }
 
