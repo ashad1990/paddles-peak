@@ -3,369 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Paddles Peak — Premium Pickleball Paddles</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>Paddles Peak — The Base Camp Bundle</title>
+  <meta name="description" content="The Base Camp Bundle — The Summit Paddle + Paddles Peak Carry Case. $59.99. USAPA Approved.">
   <link rel="stylesheet" href="css/styles.css">
-  <style>
-    /* PAGE-SPECIFIC OVERRIDES FOR ECOMMERCE LOOK */
-    body { font-family: 'Poppins', sans-serif; background: #fff; color: #1a1a2e; }
-    /* ── NAVBAR ── */
-    .navbar { background: #fff !important; border-bottom: 1px solid #e5e7eb; }
-    .nav-logo { color: #1a1a2e !important; font-weight: 900; font-size: 1.3rem; letter-spacing: -0.5px; }
-    .nav-logo span { color: #2dd4bf; }
-    .nav-menu a { color: #4a5568 !important; font-weight: 500; }
-    .nav-menu a:hover { color: #2dd4bf !important; }
-    .nav-cart-btn { background: #1a1a2e !important; color: #fff !important; border: none !important; border-radius: 8px; padding: 0.5rem 1.1rem; font-weight: 600; }
-    .nav-cart-btn:hover { background: #2dd4bf !important; color: #1a1a2e !important; }
-    .cart-badge { background: #2dd4bf; color: #1a1a2e; }
-    /* ── HERO ── */
-    .hero { min-height: 92vh; background: #0d1b2a; display: flex; align-items: center; }
-    .hero-content { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 3rem; max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; width: 100%; }
-    .hero-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #2dd4bf; margin-bottom: 1rem; display: block; }
-    .hero-title { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 900; color: #fff; line-height: 1.1; margin-bottom: 1.25rem; }
-    .hero-title .highlight { color: #2dd4bf; }
-    .hero-sub { font-size: 1.05rem; color: #94a3b8; margin-bottom: 2rem; line-height: 1.7; }
-    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
-    .btn-hero-primary { background: #2dd4bf; color: #0d1b2a; padding: 0.9rem 2.2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-block; transition: all 0.2s; }
-    .btn-hero-primary:hover { background: #14b8a6; transform: translateY(-2px); }
-    .btn-hero-secondary { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,0.3); padding: 0.9rem 2.2rem; border-radius: 8px; font-weight: 600; font-size: 1rem; text-decoration: none; display: inline-block; transition: all 0.2s; }
-    .btn-hero-secondary:hover { border-color: #2dd4bf; color: #2dd4bf; }
-    .hero-visual { display: flex; justify-content: center; align-items: center; }
-    .hero-img-wrap { position: relative; }
-    .hero-img-wrap img { max-height: 520px; width: auto; object-fit: contain; filter: drop-shadow(0 30px 60px rgba(0,0,0,0.5)); }
-    /* ── TRUST BAR ── */
-    .trust-bar { background: #f8fafc; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; padding: 1rem 2rem; }
-    .trust-bar-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: center; gap: 3rem; flex-wrap: wrap; }
-    .trust-item-bar { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; font-weight: 600; color: #4a5568; }
-    .trust-item-bar .ti { color: #2dd4bf; font-size: 1.1rem; }
-    /* ── PRODUCTS SECTION ── */
-    .section-products { background: #fff; padding: 5rem 2rem; }
-    .section-products .container { max-width: 1200px; margin: 0 auto; }
-    .section-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #2dd4bf; text-align: center; margin-bottom: 0.5rem; }
-    .section-title-dark { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; color: #1a1a2e; text-align: center; margin-bottom: 0.5rem; }
-    .section-sub-dark { color: #6b7280; text-align: center; margin-bottom: 3rem; font-size: 1rem; }
-    .products-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 900px; margin: 0 auto; }
-    /* Product cards — Shopify-style */
-    .pcard { background: #fff; border-radius: 16px; border: 1px solid #e5e7eb; overflow: hidden; transition: all 0.25s; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-    .pcard:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); border-color: #2dd4bf; }
-    .pcard-img-wrap { position: relative; background: #f8fafc; aspect-ratio: 1; overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 2rem; }
-    .pcard-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.3s ease; }
-    .pcard:hover .pcard-img-wrap img { transform: scale(1.05); }
-    .pcard-badge { position: absolute; top: 12px; right: 12px; background: #2dd4bf; color: #0d1b2a; font-size: 0.7rem; font-weight: 700; padding: 0.3rem 0.7rem; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .pcard-body { padding: 1.5rem; }
-    .pcard-name { font-size: 1.15rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.4rem; }
-    .pcard-desc { font-size: 0.875rem; color: #6b7280; line-height: 1.5; margin-bottom: 0.75rem; }
-    .pcard-stars { display: flex; align-items: center; gap: 0.35rem; margin-bottom: 1rem; }
-    .pcard-stars .star-filled { color: #f59e0b; font-size: 0.95rem; }
-    .pcard-stars .rating-text { font-size: 0.8rem; color: #6b7280; }
-    .pcard-footer { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
-    .pcard-price { font-size: 1.4rem; font-weight: 800; color: #1a1a2e; }
-    .btn-atc { background: #1a1a2e; color: #fff; border: none; padding: 0.65rem 1.4rem; border-radius: 8px; font-weight: 600; font-size: 0.875rem; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-    .btn-atc:hover { background: #2dd4bf; color: #0d1b2a; }
-    .pcard-bundle-tag { font-size: 0.78rem; color: #2dd4bf; font-weight: 600; margin-bottom: 0.5rem; }
-    /* ── FEATURES ── */
-    .section-features { background: #f8fafc; padding: 5rem 2rem; }
-    .section-features .container { max-width: 1200px; margin: 0 auto; }
-    .features-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .fcard { background: #fff; border-radius: 12px; padding: 2rem 1.5rem; text-align: center; border: 1px solid #e5e7eb; transition: all 0.2s; }
-    .fcard:hover { border-color: #2dd4bf; transform: translateY(-3px); box-shadow: 0 8px 24px rgba(45,212,191,0.12); }
-    .fcard-icon { font-size: 2.5rem; margin-bottom: 1rem; }
-    .fcard-title { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
-    .fcard-desc { font-size: 0.875rem; color: #6b7280; line-height: 1.6; }
-    /* ── BUNDLE BAND ── */
-    .bundle-band { background: #0d1b2a; padding: 5rem 2rem; }
-    .bundle-band .container { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
-    .bundle-band-img img { max-width: 100%; object-fit: contain; border-radius: 12px; }
-    .bundle-band-text { color: #fff; }
-    .bundle-band-eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #2dd4bf; margin-bottom: 1rem; display: block; }
-    .bundle-band-title { font-size: 2rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; }
-    .bundle-band-price { font-size: 3rem; font-weight: 900; color: #2dd4bf; margin-bottom: 0.25rem; }
-    .bundle-band-sub { font-size: 0.9rem; color: #94a3b8; margin-bottom: 2rem; }
-    .btn-bundle { background: #2dd4bf; color: #0d1b2a; padding: 0.9rem 2.2rem; border-radius: 8px; font-weight: 700; font-size: 1rem; text-decoration: none; display: inline-block; transition: all 0.2s; }
-    .btn-bundle:hover { background: #14b8a6; }
-    /* ── TESTIMONIALS ── */
-    .section-reviews { background: #fff; padding: 5rem 2rem; }
-    .section-reviews .container { max-width: 1200px; margin: 0 auto; }
-    .reviews-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
-    .rcard { background: #f8fafc; border-radius: 12px; padding: 1.75rem; border: 1px solid #e5e7eb; }
-    .rcard-stars { color: #f59e0b; font-size: 1rem; margin-bottom: 0.75rem; }
-    .rcard-text { font-size: 0.9rem; color: #4a5568; line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
-    .rcard-author { display: flex; align-items: center; gap: 0.75rem; }
-    .rcard-avatar { width: 40px; height: 40px; border-radius: 50%; background: #2dd4bf; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #0d1b2a; font-size: 0.875rem; }
-    .rcard-name { font-weight: 700; color: #1a1a2e; font-size: 0.9rem; }
-    .rcard-location { font-size: 0.78rem; color: #9ca3af; }
-    /* ── FOOTER ── */
-    .footer { background: #0d1b2a; color: #94a3b8; padding: 3rem 2rem 1.5rem; }
-    .footer-grid { max-width: 1200px; margin: 0 auto 2rem; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; }
-    .footer-logo { font-size: 1.3rem; font-weight: 900; color: #fff; margin-bottom: 0.75rem; }
-    .footer-logo span { color: #2dd4bf; }
-    .footer-tagline { font-size: 0.875rem; line-height: 1.6; max-width: 260px; }
-    .footer-col h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: #fff; margin-bottom: 1rem; }
-    .footer-col a { display: block; font-size: 0.875rem; color: #94a3b8; margin-bottom: 0.5rem; text-decoration: none; transition: color 0.2s; }
-    .footer-col a:hover { color: #2dd4bf; }
-    .footer-bottom { max-width: 1200px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-    .footer-bottom p { font-size: 0.8rem; margin: 0; }
-    @media (max-width: 768px) {
-      .hero-content { grid-template-columns: 1fr; padding: 3rem 1.5rem; text-align: center; }
-      .hero-visual { display: none; }
-      .products-grid-2 { grid-template-columns: 1fr; }
-      .features-grid-4 { grid-template-columns: repeat(2, 1fr); }
-      .bundle-band .container { grid-template-columns: 1fr; text-align: center; }
-      .reviews-grid { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .trust-bar-inner { gap: 1.5rem; }
-    }
-  </style>
 </head>
-<body>
+<body data-page="index">
 
-<!-- NAVBAR -->
-<nav class="navbar" id="navbar">
-  <div class="nav-container">
-    <a href="index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
-    <div class="nav-menu">
-      <a href="shop.html">Shop</a>
-      <a href="#features">Features</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#about">About</a>
-    </div>
-    <div class="nav-cart">
-      <a href="cart.html">
-        <button class="nav-cart-btn" aria-label="Cart">
-          🛒 Cart <span class="cart-badge" id="cart-badge-nav" style="display:none">0</span>
-        </button>
-      </a>
-    </div>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    Free Shipping on Orders Over $50 &nbsp;·&nbsp; USAPA Approved &nbsp;·&nbsp; 30-Day Returns
   </div>
-</nav>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-content">
-    <div class="hero-text">
-      <span class="hero-eyebrow">⛰ Premium Pickleball Gear</span>
-      <h1 class="hero-title">Reach New <span class="highlight">Heights</span><br>in Every Rally</h1>
-      <p class="hero-sub">Raw carbon fiber face. Polymer honeycomb core. Built for players who demand elite spin, control, and power — USAPA approved from day one.</p>
-      <div class="hero-actions">
-        <a href="shop.html" class="btn-hero-primary">Shop Now</a>
-        <a href="product.html?id=base-camp-bundle" class="btn-hero-secondary">View Bundle — $59.99</a>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">PADDLES PEAK</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html" class="nav-cart">Cart <span class="cart-count">(0)</span></a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="index.html">Home</a>
+    <a href="product.html">Product</a>
+    <a href="cart.html">Cart <span class="cart-count">(0)</span></a>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-image">
+      <img src="images/ChatGPT Image Apr 3, 2026, 03_14_13 PM.png" alt="The Summit Paddle — lifestyle photo">
+    </div>
+    <div class="hero-content">
+      <p class="hero-label">The Base Camp Bundle</p>
+      <h1 class="hero-headline">Reach New Heights in Every Rally</h1>
+      <p class="hero-sub">The Summit Paddle + premium carry case. Everything you need. One unbeatable price.</p>
+      <p class="hero-price">$59.99</p>
+      <button class="btn-primary add-to-cart-btn">Add to Cart — $59.99</button>
+      <div class="hero-trust">
+        <span class="trust-badge"><span class="check">✓</span> USAPA Approved</span>
+        <span class="trust-badge"><span class="check">✓</span> Raw Carbon Fiber Face</span>
+        <span class="trust-badge"><span class="check">✓</span> Free Shipping</span>
+        <span class="trust-badge"><span class="check">✓</span> 30-Day Returns</span>
       </div>
     </div>
-    <div class="hero-visual">
-      <div class="hero-img-wrap">
-        <img src="images/ChatGPT Image Apr 3, 2026, 03_14_13 PM.png" alt="Hand holding Paddles Peak pickleball paddle">
-      </div>
+  </section>
+
+  <!-- Social Proof Strip -->
+  <div class="proof-strip">
+    <div class="proof-pills">
+      <span class="proof-pill"><span class="stars">★★★★★</span> Rated 4.9/5</span>
+      <span class="proof-divider">|</span>
+      <span class="proof-pill">89+ Reviews</span>
+      <span class="proof-divider">|</span>
+      <span class="proof-pill">USAPA Certified</span>
+      <span class="proof-divider">|</span>
+      <span class="proof-pill">Free Shipping on Orders $50+</span>
     </div>
   </div>
-</section>
 
-<!-- TRUST BAR -->
-<div class="trust-bar">
-  <div class="trust-bar-inner">
-    <span class="trust-item-bar"><span class="ti">⭐</span> 4.9/5 Average Rating</span>
-    <span class="trust-item-bar"><span class="ti">✓</span> USAPA Approved</span>
-    <span class="trust-item-bar"><span class="ti">🚚</span> Free Shipping Over $75</span>
-    <span class="trust-item-bar"><span class="ti">↩</span> 30-Day Returns</span>
-  </div>
-</div>
-
-<!-- PRODUCTS -->
-<section class="section-products" id="collection">
-  <div class="container">
-    <p class="section-eyebrow">Our Collection</p>
-    <h2 class="section-title-dark">Built for the Court</h2>
-    <p class="section-sub-dark">Handcrafted for champions. Two products, zero compromise.</p>
-    <div class="products-grid-2">
-
-      <!-- Summit Paddle -->
-      <div class="pcard">
-        <div class="pcard-img-wrap">
-          <img src="images/ChatGPT Image Apr 3, 2026, 03_14_04 PM.png" alt="The Summit Paddle — Paddles Peak">
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-name">The Summit Paddle</div>
-          <div class="pcard-desc">Raw carbon fiber face. Polymer honeycomb core. USAPA approved.</div>
-          <div class="pcard-stars">
-            <span class="star-filled">★★★★★</span>
-            <span class="rating-text">4.8 (124 reviews)</span>
+  <!-- Product Detail Section -->
+  <section class="product-section">
+    <div class="container">
+      <div class="product-layout">
+        <!-- Gallery -->
+        <div class="gallery-col">
+          <div class="gallery-main">
+            <img id="gallery-main" class="product-img"
+              src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png"
+              alt="The Base Camp Bundle — paddle and case">
           </div>
-          <div class="pcard-footer">
-            <span class="pcard-price">$89.99</span>
-            <button class="btn-atc" onclick="addToCartById('summit-paddle')">Add to Cart</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Base Camp Bundle -->
-      <div class="pcard">
-        <div class="pcard-img-wrap">
-          <span class="pcard-badge">Best Value</span>
-          <img src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png" alt="The Base Camp Bundle — Paddle + Case">
-        </div>
-        <div class="pcard-body">
-          <div class="pcard-bundle-tag">🎒 Paddle + Case Included</div>
-          <div class="pcard-name">The Base Camp Bundle</div>
-          <div class="pcard-desc">Paddle + Case. One price. Zero compromise.</div>
-          <div class="pcard-stars">
-            <span class="star-filled">★★★★★</span>
-            <span class="rating-text">4.9 (89 reviews)</span>
-          </div>
-          <div class="pcard-footer">
-            <span class="pcard-price">$59.99</span>
-            <button class="btn-atc" onclick="addToCartById('base-camp-bundle')">Add to Cart</button>
+          <div class="gallery-thumbs">
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png"
+              data-alt="Bundle shot — paddle and case">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png" alt="Bundle">
+            </div>
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_04 PM.png"
+              data-alt="Paddle front">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_04 PM.png" alt="Paddle">
+            </div>
+            <div class="thumb gallery-thumb"
+              data-src="images/ChatGPT Image Apr 3, 2026, 03_14_23 PM.png"
+              data-alt="Carry case render">
+              <img src="images/ChatGPT Image Apr 3, 2026, 03_14_23 PM.png" alt="Case">
+            </div>
           </div>
         </div>
-      </div>
 
-    </div>
-  </div>
-</section>
+        <!-- Product Info -->
+        <div class="product-info">
+          <h2>The Base Camp Bundle</h2>
+          <p class="price">$59.99</p>
 
-<!-- FEATURES -->
-<section class="section-features" id="features">
-  <div class="container">
-    <p class="section-eyebrow">Why Paddles Peak</p>
-    <h2 class="section-title-dark">Championship-Level Technology</h2>
-    <div class="features-grid-4">
-      <div class="fcard">
-        <div class="fcard-icon">🏔️</div>
-        <div class="fcard-title">Raw Carbon Fiber Face</div>
-        <p class="fcard-desc">Elite spin and control with textured raw carbon fiber — the same material used by touring professionals.</p>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">⚡</div>
-        <div class="fcard-title">Polymer Honeycomb Core</div>
-        <p class="fcard-desc">16mm polypropylene honeycomb core delivers explosive power and absorbs vibration for consistent feel.</p>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">🎯</div>
-        <div class="fcard-title">Oversized Sweet Spot</div>
-        <p class="fcard-desc">Extended hitting surface means more power and control, even on off-center strikes.</p>
-      </div>
-      <div class="fcard">
-        <div class="fcard-icon">✅</div>
-        <div class="fcard-title">USAPA Approved</div>
-        <p class="fcard-desc">Tournament-ready out of the box. Certified for official play at all levels.</p>
-      </div>
-    </div>
-  </div>
-</section>
+          <div>
+            <p class="includes-title">What's Included:</p>
+            <div class="includes-list">
+              <div class="includes-item">
+                <span class="check">✓</span>
+                <div class="includes-item-text">
+                  <strong>The Summit Paddle</strong>
+                  <p>Raw Carbon Fiber Face, Polymer Honeycomb Core, USAPA Approved</p>
+                </div>
+              </div>
+              <div class="includes-item">
+                <span class="check">✓</span>
+                <div class="includes-item-text">
+                  <strong>Paddles Peak Carry Case</strong>
+                  <p>Padded interior, mesh front pocket, zip closure</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<!-- BUNDLE BAND -->
-<section class="bundle-band" id="about">
-  <div class="container">
-    <div class="bundle-band-img">
-      <img src="images/ChatGPT Image Apr 3, 2026, 03_14_19 PM.png" alt="Paddles Peak Bundle — Paddle and Case">
-    </div>
-    <div class="bundle-band-text">
-      <span class="bundle-band-eyebrow">🎒 Best Value</span>
-      <h2 class="bundle-band-title">The Complete Kit.<br>One Price.</h2>
-      <div class="bundle-band-price">$59.99</div>
-      <p class="bundle-band-sub">Paddle + Premium Carry Case — everything you need to hit the court today.</p>
-      <a href="product.html?id=base-camp-bundle" class="btn-bundle">Shop the Bundle</a>
-    </div>
-  </div>
-</section>
+          <table class="specs-table">
+            <tr><td>Face Material</td><td>Raw Carbon Fiber (T700)</td></tr>
+            <tr><td>Core</td><td>Polymer Honeycomb</td></tr>
+            <tr><td>Weight</td><td>7.8 oz</td></tr>
+            <tr><td>Grip Size</td><td>4.25 inches</td></tr>
+            <tr><td>Certification</td><td>USAPA Approved</td></tr>
+            <tr><td>Includes</td><td>Summit Paddle + Carry Case</td></tr>
+          </table>
 
-<!-- REVIEWS -->
-<section class="section-reviews" id="reviews">
-  <div class="container">
-    <p class="section-eyebrow">Customer Reviews</p>
-    <h2 class="section-title-dark">What Players Are Saying</h2>
-    <div class="reviews-grid">
-      <div class="rcard">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"The spin I get with this paddle is insane. Best $90 I've spent on pickleball gear. The carbon fiber face grabs the ball in a way nothing else does."</p>
-        <div class="rcard-author">
-          <div class="rcard-avatar">JM</div>
-          <div><div class="rcard-name">Jordan M.</div><div class="rcard-location">Austin, TX — 4.5 Player</div></div>
-        </div>
-      </div>
-      <div class="rcard">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Got the Base Camp Bundle and it's the best investment I've made in my game. The case is premium quality and fits the paddle perfectly."</p>
-        <div class="rcard-author">
-          <div class="rcard-avatar">SL</div>
-          <div><div class="rcard-name">Sarah L.</div><div class="rcard-location">Denver, CO — Recreational Player</div></div>
-        </div>
-      </div>
-      <div class="rcard">
-        <div class="rcard-stars">★★★★★</div>
-        <p class="rcard-text">"Switched from a big-name brand and honestly can't believe the value. The feel and control at this price point is remarkable."</p>
-        <div class="rcard-author">
-          <div class="rcard-avatar">RK</div>
-          <div><div class="rcard-name">Ryan K.</div><div class="rcard-location">Seattle, WA — Tournament Player</div></div>
+          <button class="btn-primary add-to-cart-btn">Add to Cart — $59.99</button>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER -->
-<footer class="footer">
-  <div class="footer-grid">
-    <div>
-      <div class="footer-logo">PADDLES<span> PEAK</span></div>
-      <p class="footer-tagline">Engineered for champions. Priced for everyone. Premium pickleball paddles built for players who refuse to compromise.</p>
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <h2 class="section-title">Built for the Court</h2>
+        <p class="section-sub">Every detail engineered for performance and protection.</p>
+      </div>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">��</div>
+          <h3>Raw Carbon Fiber Face</h3>
+          <p>Elite spin &amp; control on every shot. T700 carbon fiber gives you tournament-level performance.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Polymer Honeycomb Core</h3>
+          <p>Maximum power with perfect feel. The honeycomb core absorbs vibration for smooth, consistent play.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>USAPA Approved</h3>
+          <p>Tournament-ready and court-legal. Play in any sanctioned event with full confidence.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">👜</div>
+          <h3>Premium Carry Case Included</h3>
+          <p>Protect your paddle on and off the court. Padded interior, mesh pocket, secure zip closure.</p>
+        </div>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Shop</h4>
-      <a href="shop.html">All Products</a>
-      <a href="product.html?id=summit-paddle">The Summit Paddle</a>
-      <a href="product.html?id=base-camp-bundle">Base Camp Bundle</a>
-    </div>
-    <div class="footer-col">
-      <h4>Support</h4>
-      <a href="#">FAQ</a>
-      <a href="#">Shipping</a>
-      <a href="#">Returns</a>
-      <a href="#">Contact</a>
-    </div>
-    <div class="footer-col">
-      <h4>Company</h4>
-      <a href="#about">About</a>
-      <a href="#">Blog</a>
-      <a href="admin.html">Admin</a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 Paddles Peak. All rights reserved.</p>
-    <span style="font-size:0.8rem; color:#2dd4bf;">✓ USAPA Approved Products</span>
-  </div>
-</footer>
+  </section>
 
-<script src="js/products.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/orders.js"></script>
-<script src="js/main.js"></script>
-<script>
-  // Simple cart badge updater
-  function updateCartBadge() {
-    try {
-      const cart = JSON.parse(localStorage.getItem('ppCart') || '[]');
-      const total = cart.reduce((s, i) => s + i.qty, 0);
-      const badge = document.getElementById('cart-badge-nav');
-      if (badge) { badge.textContent = total; badge.style.display = total > 0 ? 'flex' : 'none'; }
-    } catch(e) {}
-  }
-  function addToCartById(id) {
-    try {
-      const cart = JSON.parse(localStorage.getItem('ppCart') || '[]');
-      const existing = cart.find(i => i.id === id);
-      if (existing) existing.qty += 1;
-      else { const p = PRODUCTS.find(p => p.id === id); if (p) cart.push({id: p.id, name: p.name, price: p.price, image: p.image, qty: 1}); }
-      localStorage.setItem('ppCart', JSON.stringify(cart));
-      updateCartBadge();
-      alert('Added to cart!');
-    } catch(e) {}
-  }
-  updateCartBadge();
+  <!-- Reviews Section -->
+  <section class="reviews-section">
+    <div class="container">
+      <div style="text-align:center;">
+        <h2 class="section-title">What Players Are Saying</h2>
+        <p class="section-sub"><span style="color:#2dd4bf;">★★★★★</span> Rated 4.9/5 by 89+ customers</p>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Absolutely love this paddle. The carbon fiber face gives insane spin and the case keeps everything protected. Best purchase I've made for pickleball."</p>
+          <p class="review-author">Sarah M. — Verified Buyer</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Got the bundle and couldn't be happier. Paddle quality is on par with paddles costing twice as much. The carry case is a nice bonus."</p>
+          <p class="review-author">James K. — Verified Buyer</p>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p class="review-text">"Fast shipping, great packaging, and the paddle performs beautifully. The mountain graphic looks amazing on court."</p>
+          <p class="review-author">Lisa T. — Verified Buyer</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  // Navbar scroll effect
-  window.addEventListener('scroll', () => {
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
-  });
-</script>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-logo">PADDLES PEAK</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="product.html">Product</a>
+        <a href="cart.html">Cart</a>
+        <a href="admin.html">Admin</a>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Paddles Peak. All rights reserved.</p>
+        <p style="margin-top:4px;">USAPA Approved · Premium Pickleball Equipment</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/product-data.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
