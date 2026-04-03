@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Paddles Peak</title>
+  <meta name="description" content="Shop premium pickleball paddles. The Summit Paddle and The Base Camp Bundle — USAPA approved, raw carbon fiber.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .shop-tagline {
+      text-align: center;
+      color: var(--white-dim);
+      font-size: 1.05rem;
+      font-style: italic;
+      margin-bottom: 2.5rem;
+    }
+
+    .shop-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2.5rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .shop-count { color: var(--white-dim); font-size: 0.9rem; }
+
+    .shop-sort {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .shop-sort label {
+      font-size: 0.85rem;
+      color: var(--white-dim);
+      white-space: nowrap;
+      margin-bottom: 0;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+
+    .shop-sort select {
+      width: auto;
+      min-width: 180px;
+      padding: 0.55rem 0.9rem;
+    }
+
+    .shop-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 600px) {
+      .shop-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">Paddles<span>Peak</span></a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html" class="active">Shop</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link" aria-label="Shopping cart">
+          🛒 <span class="cart-badge">0</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="cart-feedback">✓ Added to cart!</div>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>Our Collection</h1>
+      <p>Handcrafted for the court. Built for champions.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <p class="shop-tagline">Handcrafted for the court. Built for champions.</p>
+
+      <div class="shop-toolbar">
+        <span class="shop-count" id="shop-count">2 products</span>
+        <div class="shop-sort">
+          <label for="sort-select">Sort by:</label>
+          <select id="sort-select">
+            <option value="popularity">Popularity</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="shop-grid" id="shop-grid"></div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Paddles<span>Peak</span></div>
+          <p>Premium pickleball paddles handcrafted for champions. USAPA approved, carbon fiber precision, mountain-inspired design.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="product.html?id=1">The Summit Paddle</a></li>
+            <li><a href="product.html?id=2">The Base Camp Bundle</a></li>
+            <li><a href="cart.html">Your Cart</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Paddles Peak. All rights reserved.</p>
+        <p>USAPA Approved · Carbon Fiber · Built for Champions</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    let currentProducts = [...PRODUCTS];
+
+    function renderGrid() {
+      const grid = document.getElementById('shop-grid');
+      grid.innerHTML = currentProducts.map(p => buildProductCardHTML(p)).join('');
+      document.getElementById('shop-count').textContent = currentProducts.length + ' product' + (currentProducts.length !== 1 ? 's' : '');
+    }
+
+    document.getElementById('sort-select').addEventListener('change', function() {
+      const val = this.value;
+      if (val === 'price-asc') {
+        currentProducts.sort((a, b) => a.price - b.price);
+      } else if (val === 'price-desc') {
+        currentProducts.sort((a, b) => b.price - a.price);
+      } else {
+        // popularity: sort by reviews desc
+        currentProducts.sort((a, b) => b.reviews - a.reviews);
+      }
+      renderGrid();
+    });
+
+    renderGrid();
+  </script>
+</body>
+</html>

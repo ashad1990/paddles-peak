@@ -1,0 +1,17 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'>
+  <rect width='600' height='600' fill='#0a0f14'/>
+  <defs>
+    <radialGradient id='glow2' cx='50%' cy='50%' r='50%'>
+      <stop offset='0%' stop-color='rgba(45,212,191,0.2)'/>
+      <stop offset='100%' stop-color='transparent'/>
+    </radialGradient>
+  </defs>
+  <circle cx='300' cy='300' r='280' fill='url(#glow2)'/>
+  <rect x='120' y='180' width='360' height='280' rx='20' fill='#111' stroke='#2dd4bf' stroke-width='3'/>
+  <line x1='120' y1='290' x2='480' y2='290' stroke='#2dd4bf' stroke-width='2' stroke-dasharray='8,4'/>
+  <path d='M250 180 Q300 140 350 180' stroke='#2dd4bf' stroke-width='4' fill='none' stroke-linecap='round'/>
+  <text x='300' y='260' font-family='Arial,sans-serif' font-size='22' font-weight='bold' fill='#2dd4bf' text-anchor='middle'>PADDLES</text>
+  <text x='300' y='285' font-family='Arial,sans-serif' font-size='22' font-weight='bold' fill='#2dd4bf' text-anchor='middle'>PEAK</text>
+  <polygon points='300,320 270,370 330,370' fill='#2dd4bf' opacity='0.8'/>
+  <text x='300' y='560' font-family='Arial,sans-serif' font-size='18' font-weight='bold' fill='#2dd4bf' text-anchor='middle'>CARRY CASE</text>
+</svg>

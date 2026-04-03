@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart — Paddles Peak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .cart-layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    .cart-items { display: flex; flex-direction: column; gap: 1rem; }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      gap: 1.25rem;
+      align-items: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.25rem;
+    }
+
+    .cart-item-img {
+      width: 80px;
+      height: 80px;
+      background: var(--bg-primary);
+      background-image: radial-gradient(circle, var(--teal-glow) 0%, transparent 70%);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cart-item-img img { width: 100%; height: 100%; object-fit: contain; }
+
+    .cart-item-name {
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      color: var(--white);
+      font-size: 0.95rem;
+    }
+
+    .cart-item-price { color: var(--teal); font-weight: 700; font-size: 0.95rem; }
+
+    .cart-item-controls {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 0.75rem;
+    }
+
+    .cart-item-total { font-weight: 800; color: var(--white); font-size: 1.05rem; }
+
+    .cart-item-qty {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .cart-item-qty button {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--white);
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: border-color var(--transition);
+    }
+
+    .cart-item-qty button:hover { border-color: var(--teal); }
+
+    .cart-item-qty span {
+      font-weight: 700;
+      min-width: 24px;
+      text-align: center;
+    }
+
+    .cart-remove-btn {
+      background: none;
+      border: none;
+      color: var(--white-dim);
+      cursor: pointer;
+      font-size: 0.8rem;
+      text-decoration: underline;
+      transition: color var(--transition);
+    }
+
+    .cart-remove-btn:hover { color: var(--error); }
+
+    /* Summary */
+    .cart-summary {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      position: sticky;
+      top: 5.5rem;
+    }
+
+    .cart-summary h2 { font-size: 1.15rem; margin-bottom: 1.5rem; }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+      font-size: 0.9rem;
+      color: var(--white-dim);
+    }
+
+    .summary-row.total {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .summary-row.total span:last-child { color: var(--teal); }
+
+    .cart-empty {
+      text-align: center;
+      padding: 5rem 0;
+      color: var(--white-dim);
+    }
+
+    .cart-empty h2 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    .cart-empty p { margin-bottom: 2rem; }
+
+    @media (max-width: 768px) {
+      .cart-layout { grid-template-columns: 1fr; }
+      .cart-summary { position: static; }
+    }
+
+    @media (max-width: 500px) {
+      .cart-item { grid-template-columns: 64px 1fr; }
+      .cart-item-controls { grid-column: 1 / -1; flex-direction: row; justify-content: space-between; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand">Paddles<span>Peak</span></a>
+      <ul class="nav-menu">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="admin.html">Admin</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-link" aria-label="Shopping cart">
+          🛒 <span class="cart-badge">0</span>
+        </a>
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <div id="cart-feedback">✓ Added to cart!</div>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>Your Cart</h1>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container" id="cart-container"></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">Paddles<span>Peak</span></div>
+          <p>Premium pickleball paddles handcrafted for champions.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="product.html?id=1">The Summit Paddle</a></li>
+            <li><a href="product.html?id=2">The Base Camp Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Info</h4>
+          <ul>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Paddles Peak. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    function renderCart() {
+      const container = document.getElementById('cart-container');
+      const items = Cart.getCart();
+
+      if (items.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty">
+            <h2>Your cart is empty</h2>
+            <p>Looks like you haven't added anything yet.</p>
+            <a href="shop.html" class="btn btn-primary btn-lg">Browse Products</a>
+          </div>
+        `;
+        return;
+      }
+
+      const subtotal = Cart.getTotal();
+      const shipping = subtotal >= 75 ? 0 : 8.99;
+      const total = subtotal + shipping;
+
+      container.innerHTML = `
+        <div class="cart-layout">
+          <div class="cart-items">
+            ${items.map(item => `
+              <div class="cart-item" data-id="${item.id}">
+                <div class="cart-item-img">
+                  <img src="${item.image}" alt="${item.name}">
+                </div>
+                <div>
+                  <div class="cart-item-name">
+                    <a href="product.html?id=${item.id}" style="color:inherit;">${item.name}</a>
+                  </div>
+                  <div class="cart-item-price">${formatPrice(item.price)} each</div>
+                </div>
+                <div class="cart-item-controls">
+                  <div class="cart-item-total">${formatPrice(item.price * item.quantity)}</div>
+                  <div class="cart-item-qty">
+                    <button onclick="changeQty(${item.id}, ${item.quantity - 1})">−</button>
+                    <span>${item.quantity}</span>
+                    <button onclick="changeQty(${item.id}, ${item.quantity + 1})">+</button>
+                  </div>
+                  <button class="cart-remove-btn" onclick="removeFromCart(${item.id})">Remove</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="cart-summary">
+            <h2>Order Summary</h2>
+            <div class="summary-row"><span>Subtotal</span><span>${formatPrice(subtotal)}</span></div>
+            <div class="summary-row"><span>Shipping</span><span>${shipping === 0 ? 'Free 🎉' : formatPrice(shipping)}</span></div>
+            ${subtotal < 75 ? `<div class="summary-row"><span style="color:var(--teal); font-size:0.82rem;">Add ${formatPrice(75 - subtotal)} for free shipping!</span></div>` : ''}
+            <div class="summary-row total"><span>Total</span><span>${formatPrice(total)}</span></div>
+            <a href="checkout.html" class="btn btn-primary btn-full btn-lg" style="margin-top:1.5rem; display:flex;">Proceed to Checkout</a>
+            <a href="shop.html" class="btn btn-ghost btn-full" style="margin-top:0.75rem;">Continue Shopping</a>
+          </div>
+        </div>
+      `;
+    }
+
+    function changeQty(id, qty) {
+      Cart.updateQuantity(id, qty);
+      renderCart();
+    }
+
+    function removeFromCart(id) {
+      Cart.removeItem(id);
+      renderCart();
+    }
+
+    renderCart();
+  </script>
+</body>
+</html>
