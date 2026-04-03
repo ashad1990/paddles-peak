@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — Paddles Peak</title>
+  <meta name="description" content="Shop Paddles Peak premium pickleball paddles. Raw carbon fiber face, polymer honeycomb core. USAPA approved.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
+    <div id="nav-menu" class="nav-menu">
+      <a href="/shop.html">Shop</a>
+      <a href="/index.html#features">Features</a>
+      <a href="/index.html#testimonials">Reviews</a>
+      <a href="/index.html#about">About</a>
+    </div>
+    <div class="nav-cart">
+      <a href="/cart.html">
+        <button class="nav-cart-btn" aria-label="Shopping cart">
+          🛒 Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="page-header" style="padding:1.5rem;text-align:left;">
+  <div class="container">
+    <div class="breadcrumb" style="justify-content:flex-start;">
+      <a href="/index.html">Home</a>
+      <span>›</span>
+      <a href="/shop.html">Shop</a>
+      <span>›</span>
+      <span id="product-category" style="color:var(--text-primary);text-transform:capitalize;">Product</span>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT DETAIL -->
+<div class="product-detail">
+  <!-- Gallery -->
+  <div class="product-gallery">
+    <div class="product-main-img-wrap">
+      <img id="product-main-img" src="/images/paddle-main.jpg" alt="Paddles Peak product"
+        onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22400%22 height=%22500%22 viewBox=%220 0 400 500%22><rect fill=%22%231a2535%22 width=%22400%22 height=%22500%22/><text fill=%22%232dd4bf%22 font-size=%2220%22 font-family=%22sans-serif%22 x=%22200%22 y=%22250%22 text-anchor=%22middle%22>PADDLES PEAK</text></svg>'">
+    </div>
+    <div id="product-thumbs" class="product-thumbs"></div>
+  </div>
+
+  <!-- Info -->
+  <div class="product-info-col">
+    <span id="product-category-badge" class="product-category-badge">paddles</span>
+    <h1 class="product-title" id="product-name">The Summit Paddle</h1>
+    <div class="product-rating-row" id="product-rating"></div>
+    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
+      <div class="product-price-display" id="product-price">$89.99</div>
+      <span id="product-stock" class="stock-badge in-stock">In Stock</span>
+    </div>
+    <p class="product-short-desc" id="product-description">Loading...</p>
+
+    <!-- Quantity -->
+    <div class="qty-row">
+      <span class="qty-label">Qty</span>
+      <div class="qty-control">
+        <button class="qty-btn" id="qty-minus" aria-label="Decrease quantity">−</button>
+        <input type="number" class="qty-input" id="qty-input" value="1" min="1" max="99" aria-label="Quantity">
+        <button class="qty-btn" id="qty-plus" aria-label="Increase quantity">+</button>
+      </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="product-actions">
+      <button class="btn btn-teal btn-lg" id="add-to-cart-btn">Add to Cart</button>
+      <button class="btn btn-outline" id="wishlist-btn">♡ Add to Wishlist</button>
+    </div>
+
+    <!-- Trust badges -->
+    <div class="product-trust">
+      <div class="trust-item"><span class="icon">✓</span> USAPA Approved — Court ready</div>
+      <div class="trust-item"><span class="icon">🚚</span> Free shipping on orders over $75</div>
+      <div class="trust-item"><span class="icon">↩</span> 30-day hassle-free returns</div>
+      <div class="trust-item"><span class="icon">🔒</span> Secure checkout</div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab-btn active" data-tab="description">Description</button>
+        <button class="tab-btn" data-tab="specs">Specifications</button>
+        <button class="tab-btn" data-tab="reviews">Reviews</button>
+      </div>
+      <div class="tab-panel active" id="tab-description">
+        <p id="tab-desc-text" style="color:var(--text-secondary);line-height:1.8;font-size:0.95rem;">Loading...</p>
+      </div>
+      <div class="tab-panel" id="tab-specs">
+        <table class="specs-table">
+          <tbody id="product-specs-table"></tbody>
+        </table>
+      </div>
+      <div class="tab-panel" id="tab-reviews">
+        <div style="display:flex;flex-direction:column;gap:1.25rem;">
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+              <strong style="color:var(--text-primary);">Jordan M.</strong>
+              <span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span></span>
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">"The spin I get with this paddle is absolutely insane. Went from 4.0 to 4.5 within months. Highly recommend!"</p>
+          </div>
+          <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:8px;padding:1.25rem;">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.5rem;">
+              <strong style="color:var(--text-primary);">Ryan K.</strong>
+              <span class="stars"><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star full">★</span><span class="star half">★</span></span>
+            </div>
+            <p style="font-size:0.9rem;color:var(--text-secondary);margin:0;">"Switched from a big brand and can't believe the value. The feel and control at this price is remarkable."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RELATED PRODUCTS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">You May Also Like</h2>
+      <span class="accent-line"></span>
+    </div>
+    <div class="products-grid" id="related-grid"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
+      <p class="footer-brand-desc">Engineered for champions. Priced for everyone.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <div class="footer-col-links">
+        <a href="/shop.html">All Products</a>
+        <a href="/shop.html">Paddles</a>
+        <a href="/shop.html">Bundles</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <div class="footer-col-links">
+        <a href="#">FAQ</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-col-links">
+        <a href="/index.html#about">About</a>
+        <a href="/admin.html">Admin</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Paddles Peak. All rights reserved.</p>
+    <span class="footer-usapa">✓ USAPA Approved Products</span>
+  </div>
+</footer>
+
+<script>
+  // Set tab description text once product loads
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      const desc = document.getElementById('product-description');
+      const tabDesc = document.getElementById('tab-desc-text');
+      if (desc && tabDesc) tabDesc.textContent = desc.textContent;
+      const badge = document.getElementById('product-category-badge');
+      const cat = document.getElementById('product-category');
+      if (badge && cat) badge.textContent = cat.textContent;
+    }, 50);
+  });
+</script>
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/orders.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
