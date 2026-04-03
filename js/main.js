@@ -284,7 +284,7 @@ function submitOrder() {
 
   // Save order
   let orders = [];
-  try { orders = JSON.parse(localStorage.getItem('ppOrders') || '[]'); } catch { orders = []; }
+  try { orders = JSON.parse(localStorage.getItem('ppOrders') || '[]'); } catch (e) { console.error('ppOrders parse error:', e); orders = []; }
   orders.unshift(order);
   localStorage.setItem('ppOrders', JSON.stringify(orders));
 
@@ -378,13 +378,13 @@ function initAdmin() {
 
 function renderAdminDashboard() {
   let orders = [];
-  try { orders = JSON.parse(localStorage.getItem('ppOrders') || '[]'); } catch {}
+  try { orders = JSON.parse(localStorage.getItem('ppOrders') || '[]'); } catch (e) { console.error('ppOrders parse error:', e); }
 
   let inventory = 23;
   try {
     const inv = JSON.parse(localStorage.getItem('ppInventory') || 'null');
     if (inv !== null) inventory = inv;
-  } catch {}
+  } catch (e) { console.error('ppInventory parse error:', e); }
 
   const totalOrders = orders.length;
   const totalRevenue = orders.reduce((s, o) => s + (o.total || 0), 0);
