@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Checkout — Paddles Peak. Secure payment processing.">
+  <title>Checkout — Paddles Peak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">⛰ Paddles<span>Peak</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li>
+          <a href="cart.html" class="nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Checkout Page -->
+  <div class="checkout-page" id="checkout-page">
+    <div class="container">
+
+      <div style="margin-bottom:32px">
+        <h1 style="font-size:2rem;font-weight:800;margin-bottom:6px">Checkout</h1>
+        <p style="color:var(--text-secondary)">Complete your order below.</p>
+      </div>
+
+      <!-- Step Indicator -->
+      <div class="step-indicator">
+        <div class="step active">
+          <div class="step-num">1</div>
+          <span class="step-label">Shipping</span>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <span class="step-label">Payment</span>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <span class="step-label">Confirmation</span>
+        </div>
+      </div>
+
+      <div class="checkout-layout">
+
+        <!-- Left: Forms -->
+        <div>
+
+          <!-- Step 1: Shipping -->
+          <div class="checkout-step">
+            <form class="checkout-form-section" id="step1-form" novalidate>
+              <h2>📦 Shipping Information</h2>
+              <div class="form-grid">
+                <div class="form-field">
+                  <label class="form-label" for="first-name">First Name *</label>
+                  <input type="text" id="first-name" class="form-input" placeholder="Jane" autocomplete="given-name">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="last-name">Last Name *</label>
+                  <input type="text" id="last-name" class="form-input" placeholder="Smith" autocomplete="family-name">
+                </div>
+                <div class="form-field full">
+                  <label class="form-label" for="email">Email Address *</label>
+                  <input type="email" id="email" class="form-input" placeholder="jane@example.com" autocomplete="email">
+                </div>
+                <div class="form-field full">
+                  <label class="form-label" for="address">Street Address *</label>
+                  <input type="text" id="address" class="form-input" placeholder="123 Summit Way" autocomplete="street-address">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="city">City *</label>
+                  <input type="text" id="city" class="form-input" placeholder="Denver" autocomplete="address-level2">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="state">State *</label>
+                  <input type="text" id="state" class="form-input" placeholder="CO" autocomplete="address-level1">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="zip">ZIP Code *</label>
+                  <input type="text" id="zip" class="form-input" placeholder="80201" autocomplete="postal-code">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="country">Country *</label>
+                  <select id="country" class="form-input shop-select" autocomplete="country-name">
+                    <option value="US">United States</option>
+                    <option value="CA">Canada</option>
+                    <option value="GB">United Kingdom</option>
+                    <option value="AU">Australia</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div style="margin-top:24px">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  Continue to Payment →
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 2: Payment -->
+          <div class="checkout-step" style="display:none">
+            <form class="checkout-form-section" id="step2-form" novalidate>
+              <h2>💳 Payment Details</h2>
+              <p style="color:var(--text-secondary);font-size:.88rem;margin-bottom:20px">
+                🔒 Your payment information is encrypted and secure.
+              </p>
+              <div class="form-grid" style="grid-template-columns:1fr">
+                <div class="form-field">
+                  <label class="form-label" for="card-number">Card Number *</label>
+                  <input type="text" id="card-number" class="form-input" placeholder="1234 5678 9012 3456" maxlength="19" inputmode="numeric">
+                </div>
+              </div>
+              <div class="form-grid" style="margin-top:16px">
+                <div class="form-field full">
+                  <label class="form-label" for="card-name">Cardholder Name *</label>
+                  <input type="text" id="card-name" class="form-input" placeholder="Jane Smith" autocomplete="cc-name">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="card-expiry">Expiry Date *</label>
+                  <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY" maxlength="5" inputmode="numeric">
+                </div>
+                <div class="form-field">
+                  <label class="form-label" for="card-cvv">CVV *</label>
+                  <input type="text" id="card-cvv" class="form-input" placeholder="123" maxlength="4" inputmode="numeric">
+                </div>
+              </div>
+              <div style="display:flex;gap:12px;margin-top:24px">
+                <button type="button" id="back-to-step1" class="btn btn-ghost">
+                  ← Back
+                </button>
+                <button type="submit" class="btn btn-primary btn-lg">
+                  🔒 Place Order
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Step 3: Confirmation -->
+          <div class="checkout-step" style="display:none">
+            <div class="checkout-form-section">
+              <div class="order-confirmation">
+                <div class="order-success-icon">✓</div>
+                <h2 style="font-size:1.8rem;margin-bottom:8px">Order Confirmed!</h2>
+                <p style="color:var(--text-secondary);margin-bottom:20px">
+                  Thank you for your purchase! Your order has been placed successfully.
+                </p>
+                <div style="background:var(--bg-elevated);border-radius:var(--radius-md);padding:20px 28px;display:inline-block;margin-bottom:24px;text-align:left">
+                  <div class="summary-row" style="margin-bottom:8px">
+                    <span style="color:var(--text-secondary)">Order Number</span>
+                    <span id="confirm-order-num" style="color:var(--teal);font-weight:700;margin-left:24px">#PP000000</span>
+                  </div>
+                  <div class="summary-row" style="margin-bottom:8px">
+                    <span style="color:var(--text-secondary)">Email Confirmation</span>
+                    <span id="confirm-email" style="font-weight:600;margin-left:24px">—</span>
+                  </div>
+                  <div class="summary-row">
+                    <span style="color:var(--text-secondary)">Order Total</span>
+                    <span id="confirm-total" style="color:var(--teal);font-weight:700;font-size:1.1rem;margin-left:24px">$0.00</span>
+                  </div>
+                </div>
+                <p style="color:var(--text-muted);font-size:.88rem;margin-bottom:28px">
+                  A confirmation email will be sent to your inbox. Estimated delivery: 3–5 business days.
+                </p>
+                <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+                  <a href="shop.html" class="btn btn-primary">Continue Shopping</a>
+                  <a href="index.html" class="btn btn-ghost">Back to Home</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right: Order Summary -->
+        <div class="checkout-order-summary">
+          <h3>Your Order</h3>
+          <div id="checkout-items">
+            <!-- Rendered by app.js -->
+          </div>
+          <div style="margin-top:16px">
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="co-subtotal">$0.00</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span id="co-shipping">$5.99</span>
+            </div>
+            <div class="summary-row total">
+              <span>Total</span>
+              <span class="summary-value" id="co-total">$0.00</span>
+            </div>
+          </div>
+          <div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--border-subtle);display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>🔒</span> 256-bit SSL encryption
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>🛡</span> PCI DSS compliant
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>↩</span> 30-day money-back guarantee
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:16px">⛰ Paddles<span>Peak</span></a>
+          <p>Premium pickleball paddles forged in the spirit of the mountains. Engineered for players who demand the best.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="product.html?id=summit-paddle">Summit Paddle</a></li>
+            <li><a href="product.html?id=base-camp-bundle">Base Camp Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Paddles Peak. All rights reserved.</span>
+        <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="#">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

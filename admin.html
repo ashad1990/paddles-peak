@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paddles Peak Admin Panel — manage orders and inventory.">
+  <title>Admin — Paddles Peak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Admin Password Gate -->
+  <div id="admin-gate" class="admin-gate">
+    <div class="admin-gate-box">
+      <div style="font-size:3rem;margin-bottom:16px">⛰</div>
+      <h1>Admin Panel</h1>
+      <p>Enter your password to access the dashboard.</p>
+      <form id="admin-password-form">
+        <div class="form-field" style="margin-bottom:16px;text-align:left">
+          <label class="form-label" for="admin-password">Password</label>
+          <input
+            type="password"
+            id="admin-password"
+            class="form-input"
+            placeholder="Enter admin password"
+            autocomplete="current-password"
+            style="width:100%"
+          >
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          🔒 Login
+        </button>
+      </form>
+      <p style="margin-top:20px;font-size:.78rem;color:var(--text-muted)">
+        <a href="index.html" style="color:var(--text-muted)">← Back to store</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard (hidden until authenticated) -->
+  <div id="admin-dashboard" style="display:none">
+
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">⛰ Paddles<span>Peak</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html">← Store</a></li>
+          <li>
+            <button id="admin-logout" class="btn btn-ghost btn-sm">Logout</button>
+          </li>
+        </ul>
+        <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+      </div>
+    </nav>
+
+    <!-- Admin Content -->
+    <div class="admin-page">
+      <div class="container">
+
+        <div class="admin-header">
+          <div>
+            <h1>Dashboard</h1>
+            <p style="color:var(--text-secondary);margin-top:4px">Manage orders and inventory.</p>
+          </div>
+          <div style="display:flex;gap:12px">
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:16px 24px;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--teal)" id="stat-orders">0</div>
+              <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Orders</div>
+            </div>
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:16px 24px;text-align:center">
+              <div style="font-size:1.4rem;font-weight:800;color:var(--teal)" id="stat-revenue">$0</div>
+              <div style="font-size:.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em">Revenue</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="admin-tabs">
+          <button class="admin-tab-btn active" data-tab="tab-orders">📋 Orders</button>
+          <button class="admin-tab-btn" data-tab="tab-inventory">📦 Inventory</button>
+        </div>
+
+        <!-- Orders Tab -->
+        <div id="tab-orders" class="admin-tab-panel">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <h2 style="font-size:1.1rem;font-weight:700">All Orders</h2>
+            <button class="btn btn-ghost btn-sm" onclick="renderOrders()">↻ Refresh</button>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Order #</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Items</th>
+                  <th>Total</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody">
+                <tr>
+                  <td colspan="6">
+                    <div class="no-data">
+                      <div class="no-data-icon">📋</div>
+                      No orders yet
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Inventory Tab -->
+        <div id="tab-inventory" class="admin-tab-panel" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+            <h2 style="font-size:1.1rem;font-weight:700">Product Inventory</h2>
+            <p style="color:var(--text-muted);font-size:.85rem">Edit stock levels and click Save.</p>
+          </div>
+          <div style="overflow-x:auto">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Stock</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="inventory-tbody">
+                <!-- Rendered by app.js -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script src="app.js" defer></script>
+  <script>
+    // Update stats when dashboard renders
+    document.addEventListener('DOMContentLoaded', () => {
+      const origRenderOrders = window.renderOrders;
+      // Patch renderOrders to also update stats
+      const patchStats = () => {
+        const orders = getOrders();
+        const statOrders = document.getElementById('stat-orders');
+        const statRevenue = document.getElementById('stat-revenue');
+        if (statOrders) statOrders.textContent = orders.length;
+        if (statRevenue) {
+          const revenue = orders.reduce((s, o) => s + (o.total || 0), 0);
+          statRevenue.textContent = `$${revenue.toFixed(2)}`;
+        }
+      };
+
+      // Trigger stats update when admin gate passes
+      const passwordForm = document.getElementById('admin-password-form');
+      if (passwordForm) {
+        passwordForm.addEventListener('submit', () => {
+          setTimeout(patchStats, 100);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

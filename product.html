@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paddles Peak product details — premium pickleball paddles.">
+  <title>Product — Paddles Peak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">⛰ Paddles<span>Peak</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li>
+          <a href="cart.html" class="nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Product Detail Page -->
+  <div class="product-detail" id="product-page">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="breadcrumb-sep">/</span>
+        <a href="shop.html">Shop</a>
+        <span class="breadcrumb-sep">/</span>
+        <span id="breadcrumb-name" style="color:var(--text-primary)">Product</span>
+      </nav>
+
+      <!-- Product Grid -->
+      <div class="product-detail-grid">
+
+        <!-- Left: Image -->
+        <div>
+          <div class="product-img-wrap-lg" style="position:relative">
+            <img id="pd-image" src="images/paddle-main.svg" alt="Product" style="max-height:380px;width:auto">
+            <span id="pd-badge" class="badge-best-value" style="position:absolute;top:16px;right:16px;display:none"></span>
+          </div>
+        </div>
+
+        <!-- Right: Details -->
+        <div class="product-detail-info">
+          <h1 class="pd-name" style="margin-bottom:8px">Loading...</h1>
+          <div class="product-detail-price pd-price">$0.00</div>
+
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px">
+            <span style="color:var(--teal);font-size:1rem">★★★★★</span>
+            <span style="color:var(--text-muted);font-size:.85rem">(4.9 · 142 reviews)</span>
+          </div>
+
+          <p class="product-detail-desc" id="pd-description">Loading product details...</p>
+
+          <!-- Qty Selector -->
+          <div style="margin-bottom:20px">
+            <p style="font-size:.82rem;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:10px">Quantity</p>
+            <div class="qty-selector">
+              <button class="qty-btn" id="qty-dec" aria-label="Decrease quantity">−</button>
+              <input type="number" class="qty-display" id="qty-display" value="1" min="1" readonly>
+              <button class="qty-btn" id="qty-inc" aria-label="Increase quantity">+</button>
+            </div>
+          </div>
+
+          <!-- Add to Cart -->
+          <button class="btn btn-primary btn-lg btn-block" id="pd-add-to-cart" style="margin-bottom:12px">
+            🛒 Add to Cart
+          </button>
+          <a href="cart.html" class="btn btn-ghost btn-lg btn-block" style="justify-content:center">View Cart</a>
+
+          <!-- Trust badges -->
+          <div style="display:flex;gap:20px;margin-top:24px;padding-top:24px;border-top:1px solid var(--border-subtle)">
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>🚚</span> Free shipping $100+
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>↩</span> 30-day returns
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-muted)">
+              <span>🔒</span> Secure checkout
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <div class="tab-nav">
+          <button class="tab-btn active" data-tab="tab-description">Description</button>
+          <button class="tab-btn" data-tab="tab-specs">Specs</button>
+          <button class="tab-btn" data-tab="tab-reviews">Reviews</button>
+        </div>
+
+        <!-- Description Tab -->
+        <div class="tab-panel active" id="tab-description">
+          <div style="max-width:720px">
+            <p id="pd-description-tab" style="color:var(--text-secondary);line-height:1.8;font-size:.97rem">Loading...</p>
+            <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+              <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px">
+                <span style="font-size:1.5rem;display:block;margin-bottom:8px">⚡</span>
+                <h4 style="font-size:.95rem;margin-bottom:6px">Maximum Power</h4>
+                <p style="color:var(--text-muted);font-size:.85rem;line-height:1.6">Carbon fiber face transfers energy directly into every shot for explosive power.</p>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px">
+                <span style="font-size:1.5rem;display:block;margin-bottom:8px">🎯</span>
+                <h4 style="font-size:.95rem;margin-bottom:6px">Precision Control</h4>
+                <p style="color:var(--text-muted);font-size:.85rem;line-height:1.6">Honeycomb core dampens vibration for surgical shot placement every time.</p>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px">
+                <span style="font-size:1.5rem;display:block;margin-bottom:8px">🏔</span>
+                <h4 style="font-size:.95rem;margin-bottom:6px">Built to Last</h4>
+                <p style="color:var(--text-muted);font-size:.85rem;line-height:1.6">Composite edge guard protects the paddle face through thousands of games.</p>
+              </div>
+              <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-md);padding:20px">
+                <span style="font-size:1.5rem;display:block;margin-bottom:8px">✋</span>
+                <h4 style="font-size:.95rem;margin-bottom:6px">Comfortable Grip</h4>
+                <p style="color:var(--text-muted);font-size:.85rem;line-height:1.6">Cushioned perforated grip reduces fatigue during long tournament sessions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Specs Tab -->
+        <div class="tab-panel" id="tab-specs">
+          <div style="max-width:580px">
+            <table class="specs-table">
+              <tbody id="specs-table-body">
+                <tr><td colspan="2" style="color:var(--text-muted);text-align:center;padding:24px">Loading specs...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Reviews Tab -->
+        <div class="tab-panel" id="tab-reviews">
+          <div style="max-width:680px;display:flex;flex-direction:column;gap:20px">
+
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:24px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                <div>
+                  <div style="font-weight:700;color:var(--white);margin-bottom:4px">Alex T.</div>
+                  <div style="color:var(--teal);font-size:.95rem">★★★★★</div>
+                </div>
+                <span style="color:var(--text-muted);font-size:.8rem">March 2025</span>
+              </div>
+              <p style="color:var(--text-secondary);font-size:.92rem;line-height:1.7">"Absolutely love this paddle. The feel is incredible and I've noticed a huge improvement in my third-shot drops since I started using it. Worth every penny."</p>
+            </div>
+
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:24px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                <div>
+                  <div style="font-weight:700;color:var(--white);margin-bottom:4px">Priya M.</div>
+                  <div style="color:var(--teal);font-size:.95rem">★★★★★</div>
+                </div>
+                <span style="color:var(--text-muted);font-size:.8rem">February 2025</span>
+              </div>
+              <p style="color:var(--text-secondary);font-size:.92rem;line-height:1.7">"I switched from a well-known brand paddle and the difference is night and day. The weight balance is perfect and the grip is so comfortable. Highly recommend!"</p>
+            </div>
+
+            <div style="background:var(--bg-card);border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:24px">
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px">
+                <div>
+                  <div style="font-weight:700;color:var(--white);margin-bottom:4px">Derek W.</div>
+                  <div style="color:var(--teal);font-size:.95rem">★★★★☆</div>
+                </div>
+                <span style="color:var(--text-muted);font-size:.8rem">January 2025</span>
+              </div>
+              <p style="color:var(--text-secondary);font-size:.92rem;line-height:1.7">"Great paddle overall. Shipping was fast and the product looks exactly as pictured. Took off one star only because I wish it came in more colors. Performance is top notch."</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:16px">⛰ Paddles<span>Peak</span></a>
+          <p>Premium pickleball paddles forged in the spirit of the mountains. Engineered for players who demand the best.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="product.html?id=summit-paddle">Summit Paddle</a></li>
+            <li><a href="product.html?id=base-camp-bundle">Base Camp Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Paddles Peak. All rights reserved.</span>
+        <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="#">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+  <script>
+    // Sync description tab content with dynamically populated description
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const main = document.getElementById('pd-description');
+        const tab = document.getElementById('pd-description-tab');
+        if (main && tab && main.textContent !== 'Loading product details...') {
+          tab.textContent = main.textContent;
+        }
+      }, 100);
+    });
+  </script>
+</body>
+</html>

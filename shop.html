@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Shop all Paddles Peak premium pickleball paddles and bundles. Free shipping on orders over $100.">
+  <title>Shop — Paddles Peak</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">⛰ Paddles<span>Peak</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="index.html#about">About</a></li>
+        <li>
+          <a href="cart.html" class="nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <h1>Shop All Paddles</h1>
+      <p>Hand-crafted for peak performance on every court.</p>
+    </div>
+  </div>
+
+  <!-- Shop Content -->
+  <section id="shop-page" style="padding-bottom:80px">
+    <div class="container">
+
+      <!-- Sort / Filter Bar -->
+      <div class="shop-controls">
+        <div class="shop-controls-left">
+          <span>🏓</span>
+          <span>Showing <strong>2</strong> products</span>
+        </div>
+        <div class="shop-controls-right">
+          <select class="shop-select" aria-label="Sort by">
+            <option value="featured">Sort By: Featured</option>
+            <option value="price-asc">Price: Low to High</option>
+            <option value="price-desc">Price: High to Low</option>
+            <option value="newest">Newest</option>
+            <option value="best-selling">Best Selling</option>
+          </select>
+          <select class="shop-select" aria-label="Filter by category">
+            <option value="all">Filter: All Categories</option>
+            <option value="paddle">Paddles</option>
+            <option value="bundle">Bundles</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="products-grid">
+
+        <!-- Summit Paddle -->
+        <div class="product-card">
+          <a href="product.html?id=summit-paddle" style="display:block;text-decoration:none">
+            <div class="product-img-wrap">
+              <img src="images/paddle-main.svg" alt="The Summit Paddle" style="max-height:260px">
+            </div>
+          </a>
+          <div class="product-info">
+            <a href="product.html?id=summit-paddle" class="product-name">The Summit Paddle</a>
+            <p class="product-desc">Engineered for competitive players who demand peak performance. Premium carbon fiber face with polypropylene honeycomb core for unmatched power and control.</p>
+            <div class="product-price-row">
+              <span class="product-price">$89.99</span>
+            </div>
+            <div style="display:flex;gap:10px">
+              <a href="product.html?id=summit-paddle" class="btn btn-secondary btn-sm" style="flex:1;justify-content:center">View Details</a>
+              <button class="btn btn-primary btn-sm" data-product-id="summit-paddle" style="flex:1">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Base Camp Bundle -->
+        <div class="product-card" id="bundle">
+          <div class="product-card-badge">
+            <span class="badge-best-value">Best Value</span>
+          </div>
+          <a href="product.html?id=base-camp-bundle" style="display:block;text-decoration:none">
+            <div class="product-img-wrap bundle-card-img">
+              <img src="images/paddle-main.svg" alt="The Base Camp Bundle" style="max-height:260px">
+              <span class="bundle-overlay">Paddle + Case Included</span>
+            </div>
+          </a>
+          <div class="product-info">
+            <a href="product.html?id=base-camp-bundle" class="product-name">The Base Camp Bundle</a>
+            <p class="product-desc">Everything you need to start your pickleball journey. Includes our high-performance fiberglass paddle and a premium neoprene carry case — best value on the court.</p>
+            <div class="product-price-row">
+              <span class="product-price">$59.99</span>
+              <span class="product-price-orig">$79.98</span>
+            </div>
+            <div style="display:flex;gap:10px">
+              <a href="product.html?id=base-camp-bundle" class="btn btn-secondary btn-sm" style="flex:1;justify-content:center">View Details</a>
+              <button class="btn btn-primary btn-sm" data-product-id="base-camp-bundle" style="flex:1">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:16px">⛰ Paddles<span>Peak</span></a>
+          <p>Premium pickleball paddles forged in the spirit of the mountains. Engineered for players who demand the best.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="product.html?id=summit-paddle">Summit Paddle</a></li>
+            <li><a href="product.html?id=base-camp-bundle">Base Camp Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Paddles Peak. All rights reserved.</span>
+        <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="#">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>

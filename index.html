@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Paddles Peak — Premium pickleball paddles forged in the spirit of the mountains. Engineered for competitive players who demand peak performance.">
+  <title>Paddles Peak — Elevate Your Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       Navigation
+  ============================================================ -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">⛰ Paddles<span>Peak</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="#about">About</a></li>
+        <li>
+          <a href="cart.html" class="nav-cart" aria-label="Cart">
+            🛒
+            <span class="cart-count">0</span>
+          </a>
+        </li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <!-- ============================================================
+       Hero Section
+  ============================================================ -->
+  <section class="hero">
+    <div class="hero-bg">
+      <div class="hero-glow-left"></div>
+      <div class="hero-glow-right"></div>
+      <!-- Mountain SVG background decoration -->
+      <div class="mountain-bg">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 400" preserveAspectRatio="none">
+          <polygon points="0,400 200,150 400,320 600,80 800,260 1000,100 1200,280 1440,120 1440,400" fill="#2dd4bf"/>
+          <polygon points="0,400 150,220 350,360 550,160 750,300 950,140 1150,310 1350,180 1440,230 1440,400" fill="#0891b2" opacity="0.7"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-eyebrow">Premium Pickleball Equipment</span>
+        <h1>Elevate Your Game</h1>
+        <p>Premium pickleball paddles forged in the spirit of the mountains. Engineered for competitive players who demand peak performance.</p>
+        <div class="hero-actions">
+          <a href="shop.html" class="btn btn-primary btn-lg">Shop Now</a>
+          <a href="shop.html#bundle" class="btn btn-secondary btn-lg">View Bundle</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <span class="hero-stat-value">2,400+</span>
+            <span class="hero-stat-label">Players</span>
+          </div>
+          <div>
+            <span class="hero-stat-value">4.9★</span>
+            <span class="hero-stat-label">Avg Rating</span>
+          </div>
+          <div>
+            <span class="hero-stat-value">Free</span>
+            <span class="hero-stat-label">Shipping $100+</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-image">
+        <img src="images/paddle-main.svg" class="hero-paddle-img" alt="Paddles Peak Paddle">
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       Features Section
+  ============================================================ -->
+  <section class="features" id="about">
+    <div class="container">
+      <p class="section-subtitle" style="color:var(--teal);font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Why Paddles Peak</p>
+      <h2 class="section-title">Built for Champions</h2>
+      <p class="section-subtitle">Every paddle is designed with precision engineering and mountain-tested durability to give you the ultimate edge on the court.</p>
+      <span class="teal-line"></span>
+
+      <div class="features-grid" style="margin-top:48px">
+        <div class="feature-card">
+          <span class="feature-icon">⚡</span>
+          <h3>Premium Carbon Fiber</h3>
+          <p>Our paddle faces are crafted from aerospace-grade carbon fiber, delivering explosive power and pinpoint accuracy with every shot.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">⛰</span>
+          <h3>Mountain Heritage Design</h3>
+          <p>Inspired by the peak performance of elite mountain athletes, each paddle carries the spirit of the summit in its design and construction.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon">🎯</span>
+          <h3>Unmatched Control</h3>
+          <p>Polypropylene honeycomb core technology ensures exceptional touch and ball control, letting you place every shot exactly where you want it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       Products Section
+  ============================================================ -->
+  <section class="products" id="products">
+    <div class="container">
+      <p class="section-subtitle" style="color:var(--teal);font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Our Collection</p>
+      <h2 class="section-title">Gear Up for the Summit</h2>
+      <p class="section-subtitle">Hand-crafted paddles engineered for players who refuse to settle for anything less than the best.</p>
+      <span class="teal-line"></span>
+
+      <div class="products-grid">
+
+        <!-- Summit Paddle -->
+        <div class="product-card">
+          <div class="product-img-wrap">
+            <img src="images/paddle-main.svg" alt="The Summit Paddle" style="max-height:260px">
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=summit-paddle" class="product-name">The Summit Paddle</a>
+            <p class="product-desc">Engineered for competitive players who demand peak performance. Premium carbon fiber face with polypropylene honeycomb core.</p>
+            <div class="product-price-row">
+              <span class="product-price">$89.99</span>
+            </div>
+            <button class="btn btn-primary btn-add-cart" data-product-id="summit-paddle">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+        <!-- Base Camp Bundle -->
+        <div class="product-card" id="bundle">
+          <div class="product-card-badge">
+            <span class="badge-best-value">Best Value</span>
+          </div>
+          <div class="product-img-wrap bundle-card-img">
+            <img src="images/paddle-main.svg" alt="The Base Camp Bundle" style="max-height:260px">
+            <span class="bundle-overlay">Paddle + Case Included</span>
+          </div>
+          <div class="product-info">
+            <a href="product.html?id=base-camp-bundle" class="product-name">The Base Camp Bundle</a>
+            <p class="product-desc">Everything you need to start your pickleball journey. Includes our high-performance paddle and a premium neoprene carry case.</p>
+            <div class="product-price-row">
+              <span class="product-price">$59.99</span>
+              <span class="product-price-orig">$79.98</span>
+            </div>
+            <button class="btn btn-primary btn-add-cart" data-product-id="base-camp-bundle">
+              Add to Cart
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div style="text-align:center;margin-top:36px">
+        <a href="shop.html" class="btn btn-secondary">View All Products</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       Testimonials Section
+  ============================================================ -->
+  <section class="testimonials">
+    <div class="container">
+      <p class="section-subtitle" style="color:var(--teal);font-weight:600;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px">Reviews</p>
+      <h2 class="section-title">What Players Are Saying</h2>
+      <p class="section-subtitle">Join thousands of players who've taken their game to new heights with Paddles Peak.</p>
+      <span class="teal-line"></span>
+
+      <div class="testimonials-grid">
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"The Summit Paddle completely transformed my game. The carbon fiber face gives me incredible power on drives while still maintaining touch on dinks. Best paddle I've ever used."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">MR</div>
+            <div>
+              <div class="testimonial-name">Marcus R.</div>
+              <div class="testimonial-title">Tournament Player, Denver CO</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"I bought the Base Camp Bundle as a gift for my husband and we both ended up using it! The quality is phenomenal for the price. Fast shipping and beautiful packaging too."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SL</div>
+            <div>
+              <div class="testimonial-name">Sofia L.</div>
+              <div class="testimonial-title">Recreational Player, Austin TX</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">"After trying over a dozen paddles, the Summit Paddle is hands down the best. The grip feels natural, the weight balance is perfect, and my spin shots have never been more consistent."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">JK</div>
+            <div>
+              <div class="testimonial-name">James K.</div>
+              <div class="testimonial-title">Club Captain, Seattle WA</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       Footer
+  ============================================================ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo" style="display:inline-flex;margin-bottom:16px">⛰ Paddles<span>Peak</span></a>
+          <p>Premium pickleball paddles forged in the spirit of the mountains. Engineered for players who demand the best.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Shop</h4>
+          <ul>
+            <li><a href="shop.html">All Products</a></li>
+            <li><a href="product.html?id=summit-paddle">Summit Paddle</a></li>
+            <li><a href="product.html?id=base-camp-bundle">Base Camp Bundle</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping Policy</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="admin.html">Admin</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Paddles Peak. All rights reserved.</span>
+        <span>
+          <a href="#">Privacy Policy</a> &nbsp;·&nbsp;
+          <a href="#">Terms of Service</a>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
