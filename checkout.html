@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — Paddles Peak</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
+    <div id="nav-menu" class="nav-menu">
+      <a href="/shop.html">Shop</a>
+    </div>
+    <div class="nav-cart">
+      <a href="/cart.html">
+        <button class="nav-cart-btn" aria-label="Shopping cart">
+          🛒 Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/index.html">Home</a>
+    <span>›</span>
+    <a href="/cart.html">Cart</a>
+    <span>›</span>
+    <span style="color:var(--text-primary)">Checkout</span>
+  </div>
+  <h1>Checkout</h1>
+</div>
+
+<div class="checkout-page">
+  <!-- Step Progress -->
+  <div class="step-progress">
+    <div class="step-indicator active" id="step-ind-1">
+      <div class="step-circle">1</div>
+      <div class="step-label">Shipping</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-indicator" id="step-ind-2">
+      <div class="step-circle">2</div>
+      <div class="step-label">Payment</div>
+    </div>
+    <div class="step-line"></div>
+    <div class="step-indicator" id="step-ind-3">
+      <div class="step-circle">3</div>
+      <div class="step-label">Confirm</div>
+    </div>
+  </div>
+
+  <div class="checkout-grid">
+    <!-- Steps -->
+    <div>
+      <!-- STEP 1: Shipping -->
+      <div class="checkout-step active" id="checkout-step-1">
+        <div class="checkout-form-card">
+          <h3>Contact &amp; Shipping</h3>
+          <form id="step1-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Jane" required>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Smith" required>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="jane@example.com" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" class="form-control" placeholder="(555) 000-0000">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="address">Street Address *</label>
+              <input type="text" id="address" name="address" class="form-control" placeholder="123 Rally Court" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="city">City *</label>
+                <input type="text" id="city" name="city" class="form-control" placeholder="Austin" required>
+              </div>
+              <div class="form-group">
+                <label for="state">State *</label>
+                <select id="state" name="state" class="form-control" required>
+                  <option value="">Select State</option>
+                  <option>AL</option><option>AK</option><option>AZ</option><option>AR</option><option>CA</option>
+                  <option>CO</option><option>CT</option><option>DE</option><option>FL</option><option>GA</option>
+                  <option>HI</option><option>ID</option><option>IL</option><option>IN</option><option>IA</option>
+                  <option>KS</option><option>KY</option><option>LA</option><option>ME</option><option>MD</option>
+                  <option>MA</option><option>MI</option><option>MN</option><option>MS</option><option>MO</option>
+                  <option>MT</option><option>NE</option><option>NV</option><option>NH</option><option>NJ</option>
+                  <option>NM</option><option>NY</option><option>NC</option><option>ND</option><option>OH</option>
+                  <option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option>
+                  <option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VT</option>
+                  <option>VA</option><option>WA</option><option>WV</option><option>WI</option><option>WY</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="zip">ZIP Code *</label>
+              <input type="text" id="zip" name="zip" class="form-control" placeholder="78701" required style="max-width:180px;">
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-teal btn-lg btn-next-step">Continue to Payment →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 2: Payment -->
+      <div class="checkout-step" id="checkout-step-2">
+        <div class="checkout-form-card">
+          <h3>Payment Details</h3>
+          <!-- Card visual -->
+          <div class="card-visual">
+            <div class="card-chip">▣</div>
+            <div class="card-number-display" id="card-number-display">•••• •••• •••• ••••</div>
+            <div class="card-bottom">
+              <div>
+                <div class="card-label">Card Holder</div>
+                <div class="card-value" id="card-name-display">FULL NAME</div>
+              </div>
+              <div>
+                <div class="card-label">Expires</div>
+                <div class="card-value" id="card-expiry-display">MM/YY</div>
+              </div>
+              <div style="margin-left:auto;">
+                <svg width="48" height="30" viewBox="0 0 48 30" fill="none" aria-label="Card brand">
+                  <circle cx="18" cy="15" r="12" fill="#ef4444" opacity="0.8"/>
+                  <circle cx="30" cy="15" r="12" fill="#f59e0b" opacity="0.8"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <form id="step2-form" novalidate>
+            <div class="form-group">
+              <label for="card-name">Name on Card *</label>
+              <input type="text" id="card-name" name="cardName" class="form-control" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="card-number">Card Number *</label>
+              <input type="text" id="card-number" name="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" maxlength="19" required autocomplete="cc-number" inputmode="numeric">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="card-expiry">Expiry *</label>
+                <input type="text" id="card-expiry" name="cardExpiry" class="form-control" placeholder="MM/YY" maxlength="5" required autocomplete="cc-exp">
+              </div>
+              <div class="form-group">
+                <label for="card-cvv">CVV *</label>
+                <input type="text" id="card-cvv" name="cardCvv" class="form-control" placeholder="•••" maxlength="4" required autocomplete="cc-csc">
+              </div>
+            </div>
+            <div style="background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.2);border-radius:6px;padding:0.75rem 1rem;margin-top:0.5rem;font-size:0.8rem;color:var(--success);display:flex;align-items:center;gap:0.5rem;">
+              🔒 This is a demo checkout — no real payment is processed
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-ghost btn-prev-step">← Back</button>
+              <button type="button" class="btn btn-teal btn-lg btn-next-step">Review Order →</button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- STEP 3: Confirm -->
+      <div class="checkout-step" id="checkout-step-3">
+        <div class="checkout-form-card">
+          <h3>Review &amp; Place Order</h3>
+          <p style="color:var(--text-secondary);font-size:0.9rem;margin-bottom:1.5rem;">Please review your order before placing it.</p>
+
+          <div style="background:var(--bg-secondary);border-radius:8px;padding:1.25rem;margin-bottom:1.5rem;">
+            <h4 style="font-size:0.85rem;letter-spacing:1px;text-transform:uppercase;color:var(--text-secondary);margin-bottom:0.75rem;">Order Items</h4>
+            <div id="order-confirm-items" class="order-confirm-items"></div>
+            <hr class="summary-divider">
+            <div class="summary-row"><span>Subtotal</span><span id="confirm-subtotal">—</span></div>
+            <div class="summary-row"><span>Shipping</span><span id="confirm-shipping">—</span></div>
+            <div class="summary-row"><span>Tax</span><span id="confirm-tax">—</span></div>
+            <div class="summary-row" style="font-weight:700;color:var(--text-primary);font-size:1rem;">
+              <span>Total</span><span id="confirm-total">—</span>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost btn-prev-step">← Back</button>
+            <button type="button" class="btn btn-teal btn-xl" id="place-order-btn">Place Order 🏔️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sidebar summary -->
+    <div class="checkout-summary-sidebar">
+      <h4>Order Summary</h4>
+      <div id="checkout-summary-items"></div>
+      <hr class="summary-divider">
+      <div class="summary-row"><span>Subtotal</span><span id="checkout-subtotal">$0.00</span></div>
+      <div class="summary-row"><span>Shipping</span><span id="checkout-shipping">—</span></div>
+      <div class="summary-row"><span>Tax (8%)</span><span id="checkout-tax">$0.00</span></div>
+      <hr class="summary-divider">
+      <div class="summary-row" style="font-weight:700;color:var(--text-primary);">
+        <span>Total</span><span id="checkout-total">$0.00</span>
+      </div>
+      <div style="margin-top:1.5rem;display:flex;flex-direction:column;gap:0.5rem;font-size:0.8rem;color:var(--text-secondary);">
+        <span>🔒 Secure SSL checkout</span>
+        <span>🚚 Free shipping on $75+</span>
+        <span>↩ 30-day returns</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Order Success Modal -->
+<div class="modal-overlay" id="order-success-modal">
+  <div class="modal-box">
+    <div class="modal-icon">🏔️</div>
+    <h2>Order Placed!</h2>
+    <p>Thanks for reaching new heights with Paddles Peak. Your order is confirmed!</p>
+    <div class="order-num-badge" id="order-number">PP-XXXXXX</div>
+    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:1.5rem;">You'll receive a confirmation email shortly.</p>
+    <button class="btn btn-teal btn-lg" id="close-order-modal">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
+      <p class="footer-brand-desc">Engineered for champions. Priced for everyone.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <div class="footer-col-links"><a href="/shop.html">All Products</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <div class="footer-col-links"><a href="#">FAQ</a></div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-col-links"><a href="/index.html#about">About</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Paddles Peak. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  // Sync confirm step items on step change
+  document.addEventListener('DOMContentLoaded', () => {
+    const origNext = document.querySelectorAll('.btn-next-step');
+    origNext.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // If going to step 3
+        setTimeout(() => {
+          const step3 = document.getElementById('checkout-step-3');
+          if (step3 && step3.classList.contains('active')) {
+            const items = document.getElementById('checkout-summary-items');
+            const confirmItems = document.getElementById('order-confirm-items');
+            if (items && confirmItems) confirmItems.innerHTML = items.innerHTML;
+            ['subtotal','shipping','tax','total'].forEach(key => {
+              const src = document.getElementById('checkout-' + key);
+              const dst = document.getElementById('confirm-' + key);
+              if (src && dst) dst.textContent = src.textContent;
+            });
+          }
+        }, 10);
+      });
+    });
+  });
+</script>
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/orders.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>

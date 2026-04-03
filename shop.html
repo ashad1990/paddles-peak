@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shop — Paddles Peak</title>
+  <meta name="description" content="Shop premium pickleball paddles, bundles, and accessories from Paddles Peak.">
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="/index.html" class="nav-logo">PADDLES<span> PEAK</span></a>
+    <div id="nav-menu" class="nav-menu">
+      <a href="/shop.html" class="active">Shop</a>
+      <a href="/index.html#features">Features</a>
+      <a href="/index.html#testimonials">Reviews</a>
+      <a href="/index.html#about">About</a>
+    </div>
+    <div class="nav-cart">
+      <a href="/cart.html">
+        <button class="nav-cart-btn" aria-label="Shopping cart">
+          🛒 Cart
+          <span class="cart-badge">0</span>
+        </button>
+      </a>
+    </div>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </div>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="/index.html">Home</a>
+    <span>›</span>
+    <span style="color:var(--text-primary)">Shop</span>
+  </div>
+  <h1>Our Collection</h1>
+  <p style="color:var(--text-secondary);margin-top:0.5rem">From recreational players to competitive pros — find your edge</p>
+</div>
+
+<!-- SHOP LAYOUT -->
+<div class="shop-layout">
+  <!-- Sidebar -->
+  <aside class="shop-sidebar">
+    <div class="sidebar-title">Filter By</div>
+    <button class="filter-btn active" data-filter="all">
+      All Products <span class="filter-count" id="count-all"></span>
+    </button>
+    <button class="filter-btn" data-filter="paddles">
+      Paddles <span class="filter-count" id="count-paddles"></span>
+    </button>
+    <button class="filter-btn" data-filter="bundles">
+      Bundles <span class="filter-count" id="count-bundles"></span>
+    </button>
+    <button class="filter-btn" data-filter="accessories">
+      Accessories <span class="filter-count" id="count-accessories"></span>
+    </button>
+
+    <div class="sidebar-title" style="margin-top:1.5rem">Price Range</div>
+    <div style="font-size:0.85rem;color:var(--text-secondary);padding:0.5rem 0.75rem;">$39.99 — $129.99</div>
+
+    <div class="sidebar-title" style="margin-top:1.5rem">Rating</div>
+    <div style="display:flex;flex-direction:column;gap:0.4rem;padding:0 0.5rem;">
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);cursor:pointer;">
+        <input type="checkbox" checked style="accent-color:var(--accent)"> ★★★★★
+      </label>
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);cursor:pointer;">
+        <input type="checkbox" checked style="accent-color:var(--accent)"> ★★★★☆+
+      </label>
+    </div>
+
+    <div class="sidebar-title" style="margin-top:1.5rem">Approval</div>
+    <div style="display:flex;flex-direction:column;gap:0.4rem;padding:0 0.5rem;">
+      <label style="display:flex;align-items:center;gap:0.5rem;font-size:0.85rem;color:var(--text-secondary);cursor:pointer;">
+        <input type="checkbox" checked style="accent-color:var(--accent)"> USAPA Approved
+      </label>
+    </div>
+  </aside>
+
+  <!-- Main Grid -->
+  <div>
+    <div class="shop-main-header">
+      <span id="results-count" style="font-size:0.875rem;color:var(--text-secondary);">3 products</span>
+      <div style="display:flex;align-items:center;gap:0.5rem;">
+        <label for="sort-select" style="font-size:0.8rem;color:var(--text-secondary);">Sort by:</label>
+        <select id="sort-select" class="sort-select">
+          <option value="popular">Popularity</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+        </select>
+      </div>
+    </div>
+    <div class="products-grid" id="shop-grid">
+      <!-- Populated by main.js -->
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">PADDLES<span> PEAK</span></div>
+      <p class="footer-brand-desc">Engineered for champions. Priced for everyone.</p>
+      <div class="footer-socials">
+        <a href="#" class="footer-social-btn" aria-label="Instagram">📸</a>
+        <a href="#" class="footer-social-btn" aria-label="Facebook">👥</a>
+        <a href="#" class="footer-social-btn" aria-label="Twitter/X">✗</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Shop</div>
+      <div class="footer-col-links">
+        <a href="/shop.html">All Products</a>
+        <a href="/shop.html">Paddles</a>
+        <a href="/shop.html">Bundles</a>
+        <a href="/shop.html">Accessories</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Support</div>
+      <div class="footer-col-links">
+        <a href="#">FAQ</a>
+        <a href="#">Shipping</a>
+        <a href="#">Returns</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-col-links">
+        <a href="/index.html#about">About</a>
+        <a href="#">Blog</a>
+        <a href="/admin.html">Admin</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Paddles Peak. All rights reserved.</p>
+    <span class="footer-usapa">✓ USAPA Approved Products</span>
+  </div>
+</footer>
+
+<script src="/js/products.js"></script>
+<script src="/js/cart.js"></script>
+<script src="/js/orders.js"></script>
+<script src="/js/main.js"></script>
+</body>
+</html>
