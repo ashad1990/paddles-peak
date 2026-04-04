@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 52" fill="none">
+  <!-- Mountain peaks icon -->
+  <!-- Back peak (left) -->
+  <polygon points="8,40 22,18 36,40" fill="#2dd4bf" opacity="0.6"/>
+  <!-- Back peak (right) -->
+  <polygon points="24,40 38,16 52,40" fill="#2dd4bf" opacity="0.6"/>
+  <!-- Front center peak (tallest) -->
+  <polygon points="16,40 30,8 44,40" fill="#2dd4bf"/>
+
+  <!-- PADDLES wordmark -->
+  <text x="60" y="33" font-family="Poppins, Arial, sans-serif" font-weight="800" font-size="20" fill="#111111" letter-spacing="1">PADDLES</text>
+  <!-- PEAK wordmark -->
+  <text x="157" y="33" font-family="Poppins, Arial, sans-serif" font-weight="800" font-size="20" fill="#2dd4bf" letter-spacing="1">PEAK</text>
+</svg>
