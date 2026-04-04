@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 56" role="img" aria-label="Paddles Peak">
+  <title>Paddles Peak</title>
+  <!-- Left smaller peak -->
+  <polygon points="14,20 0,44 28,44" fill="#1a9e8f" opacity="0.75"/>
+  <!-- Right smaller peak -->
+  <polygon points="42,22 28,44 56,44" fill="#1a9e8f" opacity="0.75"/>
+  <!-- Center tall peak -->
+  <polygon points="28,6 8,44 48,44" fill="#2dd4bf"/>
+  <!-- Snow cap highlight -->
+  <polygon points="28,6 22,18 34,18" fill="#ffffff" opacity="0.35"/>
+  <!-- Wordmark: PADDLES (white for dark backgrounds) -->
+  <text x="66" y="27" font-family="Poppins,Arial,sans-serif" font-weight="900" font-size="15" fill="#f1f5f9" letter-spacing="2.5">PADDLES</text>
+  <!-- Wordmark: PEAK in teal -->
+  <text x="66" y="46" font-family="Poppins,Arial,sans-serif" font-weight="900" font-size="15" fill="#2dd4bf" letter-spacing="2.5">PEAK</text>
+</svg>
