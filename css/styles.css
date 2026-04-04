@@ -278,6 +278,13 @@ input, select, textarea { font-family: var(--font); }
   color: #2dd4bf;
   font-weight: 700;
 }
+/* Trust badges on light backgrounds (product info, etc.) */
+.product-info .trust-badge {
+  color: var(--text);
+}
+.product-info .hero-trust span {
+  color: var(--text);
+}
 .hero-image {
   height: 100%;
   min-height: 92vh;
